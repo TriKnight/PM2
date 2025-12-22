@@ -1,0 +1,33 @@
+<mujoco model="motor_position_control">
+    <option timestep="0.002" gravity="0 0 0"/>
+    <compiler angle="radian"/>
+
+    <worldbody>
+        <body name="motor_base" pos="0 0 0">
+            <joint
+                name="motor_hinge"
+                type="hinge"
+                axis="0 1 0"
+                limited="true"
+                range="0 6.283185"
+                damping="0.05"
+                armature="0.01"/>
+
+            <!-- Motor arm -->
+            <geom
+                type="capsule"
+                size="0.03 0.15"
+                euler="0 90 0"
+                rgba="0.2 0.6 0.9 1"/>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <!-- Position-controlled actuator (servo) -->
+        <position
+            name="motor_position"
+            joint="motor_hinge"
+            kp="1"
+            ctrlrange="0 6.283185"/>
+    </actuator>
+</mujoco>
