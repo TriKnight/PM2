@@ -1,9 +1,26 @@
 <mujoco model="motor_position_control">
-    <option timestep="0.002" gravity="0 0 0"/>
+    <option timestep="0.002" gravity="0 0 -9.81"/>
     <compiler angle="radian"/>
 
     <worldbody>
-        <body name="motor_base" pos="0 0 0">
+
+        <!-- Light source -->
+        <light
+            name="main_light"
+            pos="0 0 2"
+            dir="0 0 -1"
+            diffuse="1 1 1"
+            specular="0.3 0.3 0.3"/>
+
+        <!-- Floor -->
+        <geom
+            name="floor"
+            type="plane"
+            size="5 5 0.1"
+            rgba="0.8 0.8 0.8 1"/>
+
+        <!-- Motor system -->
+        <body name="motor_base" pos="0 0 0.5">
             <joint
                 name="motor_hinge"
                 type="hinge"
@@ -20,6 +37,7 @@
                 euler="0 90 0"
                 rgba="0.2 0.6 0.9 1"/>
         </body>
+
     </worldbody>
 
     <actuator>

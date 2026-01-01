@@ -91,7 +91,7 @@ By the end of the course, students will be able to:
 - Naming, units, and responsibility
 
 **Laboratory**
-- Variable analysis for a real system (e.g., automatic door, water tank)
+- Variable analysis for a real system (e.g., servo motor on mujoco simulation)
 
 **Deliverable**
 - Technical Variable Table (approved before coding)
