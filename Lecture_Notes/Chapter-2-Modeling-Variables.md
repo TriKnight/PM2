@@ -4,6 +4,8 @@ theme: default
 paginate: true
 math: mathjax
 backgroundColor: #fff
+markdown:
+  attributes: true
 ---
 
 # Chapter 2: Modeling Technical Variables
@@ -163,8 +165,9 @@ class MotorController:
 
 ### System Overview
 
-![Image chapter 2](../figs/controller_software_chap2.png)
-
+<p align="center">
+  <img src="../figs/controller_software_chap2.png" width="50%">
+</p>
 ---
 
 ## Input Variables Analysis

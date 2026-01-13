@@ -1,0 +1,90 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram id="door-fsm" name="Automatic Door FSM">
+    <mxGraphModel dx="935" dy="585" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="state_closed" value="CLOSED" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#dae8fc;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="200" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state_opening" value="OPENING" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#e1d5e7;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="450" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state_open" value="OPEN" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#d5e8d4;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="700" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state_closing" value="CLOSING" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=#ffe6cc;fontSize=14;" parent="1" vertex="1">
+          <mxGeometry x="450" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="state_error" value="ERROR" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#b85450;fillColor=#f8cecc;fontSize=14;fontColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="950" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_closed_opening" value="&lt;b&gt;button_pressed&lt;br&gt;&lt;/b&gt;[motor_ok == true]&lt;br&gt;/ start_motor_open" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_closed" target="state_opening" edge="1">
+          <mxGeometry x="0.0769" y="20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_closed_error" value="&lt;b&gt;button_pressed&lt;br&gt;&lt;/b&gt;[motor_ok == false]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;strokeColor=#b85450;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_closed" target="state_error" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="260" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="60" />
+              <mxPoint x="1010" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_opening_open" value="&lt;b&gt;limit_reached&lt;br&gt;&lt;/b&gt;/ stop_motor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_opening" target="state_open" edge="1">
+          <mxGeometry x="-0.0769" y="-20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_open_closing" value="&lt;span style=&quot;background-color: light-dark(rgb(245, 230, 230), rgb(18, 18, 18));&quot;&gt;&lt;b&gt;timeout&lt;br&gt;&lt;/b&gt;/ start_motor_close&lt;/span&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_open" target="state_closing" edge="1">
+          <mxGeometry x="-0.0253" y="20" relative="1" as="geometry">
+            <mxPoint x="760" y="430" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="760" y="320" />
+              <mxPoint x="510" y="320" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_closing_closed" value="limit_reached&#xa;/ stop_motor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_closing" target="state_closed" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="260" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_opening_error" value="&lt;b&gt;obstruction_detected&lt;br&gt;&lt;/b&gt;/ stop_motor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#b85450;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_opening" target="state_error" edge="1">
+          <mxGeometry x="-0.0001" y="20" relative="1" as="geometry">
+            <mxPoint x="960" y="230" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="160" />
+              <mxPoint x="1010" y="160" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_closing_error" value="&lt;b&gt;obstruction_detected&lt;br&gt;&lt;/b&gt;/ stop_motor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#b85450;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_closing" target="state_error" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_error_closed" value="reset&#xa;/ clear_error" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;dashed=1;fontSize=11;labelBackgroundColor=#ffffff;" parent="1" source="state_error" target="state_closed" edge="1">
+          <mxGeometry x="0.0111" y="-20" relative="1" as="geometry">
+            <mxPoint x="260" y="170" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1010" y="120" />
+              <mxPoint x="260" y="120" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="initial_state" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;strokeColor=#000000;" parent="1" vertex="1">
+          <mxGeometry x="120" y="220" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_initial_closed" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" parent="1" source="initial_state" target="state_closed" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

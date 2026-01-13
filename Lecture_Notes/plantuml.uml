@@ -1,0 +1,23 @@
+@startuml
+skinparam monochrome true
+
+[*] --> CLOSED
+
+state CLOSED
+state OPENING
+state OPEN
+state CLOSING
+state ERROR
+
+CLOSED --> OPENING : button_pressed\n[motor_ok == true]\n/start_motor_open
+CLOSED --> ERROR   : button_pressed\n[motor_ok == false]
+
+OPENING --> OPEN   : limit_reached\n/stop_motor
+OPEN --> CLOSING   : timeout\n/start_motor_close
+CLOSING --> CLOSED : limit_reached\n/stop_motor
+
+OPENING --> ERROR  : obstruction_detected\n/stop_motor
+CLOSING --> ERROR  : obstruction_detected\n/stop_motor
+
+ERROR --> CLOSED   : reset\n/clear_error
+@enduml

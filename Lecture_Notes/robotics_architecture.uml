@@ -1,0 +1,265 @@
+@startuml
+' Reuse the same visual style macros
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+skinparam entity {
+  BackgroundColor #ffffff
+  BorderColor #333333
+  FontSize 12
+}
+
+' =========================
+' Application Layer
+' =========================
+
+table(TeleopUI) {
+  primary_key(component): Teleop UI <<Component>>
+  --
+  column(role): Manual teleoperation and mode selection
+  column(api): Sends high-level commands to Mission Manager
+  column(interfaces): topics:/teleop_cmd, services:/set_mode
+}
+
+table(MissionManager) {
+  primary_key(component): Mission Manager <<Component>>
+  --
+  column(role): Orchestrates missions and operational modes
+  column(api): Accepts missions, forwards to Mission Planner
+  column(interfaces): topics:/mission_cmd, /mission_status
+}
+
+table(MonitoringDashboard) {
+  primary_key(component): Monitoring Dashboard <<Component>>
+  --
+  column(role): Visualize robot state, logs, and alerts
+  column(api): Subscribes to state, diagnostics, events
+  column(interfaces): topics:/robot_state, /diagnostics
+}
+
+' =========================
+' Decision & Planning
+' =========================
+
+table(MissionPlanner) {
+  primary_key(component): Mission Planner <<Component>>
+  --
+  column(role): High-level mission decomposition
+  column(api): Compute sequence of waypoints/goals
+  column(interfaces): topics:/mission_plan, /map
+}
+
+table(PathPlanner) {
+  primary_key(component): Path Planner <<Component>>
+  --
+  column(role): Generate collision-free paths
+  column(api): Plan path between start and goal
+  column(interfaces): topics:/path_request, /path_result
+}
+
+table(BehaviorManager) {
+  primary_key(component): Behavior Manager <<Component>>
+  --
+  column(role): Select behaviors (follow path, avoid obstacle)
+  column(api): Activate/deactivate behaviors based on events
+  column(interfaces): topics:/behavior_cmd, /behavior_event
+}
+
+' =========================
+' Control & Estimation
+' =========================
+
+table(StateEstimator) {
+  primary_key(component): State Estimator <<Component>>
+  --
+  column(role): Fuse sensor data into robot pose/state
+  column(api): Provide estimated state to controllers and planner
+  column(interfaces): topics:/sensor_data, /robot_state
+}
+
+table(HighLevelController) {
+  primary_key(component): High-Level Controller <<Component>>
+  --
+  column(role): Compute motion commands from goals/paths
+  column(api): Generate velocity/pose setpoints
+  column(interfaces): topics:/cmd_vel, /goal_state
+}
+
+table(LowLevelController) {
+  primary_key(component): Low-Level Controller <<Component>>
+  --
+  column(role): Convert velocity/pose setpoints to motor commands
+  column(api): Closed-loop joint/actuator control
+  column(interfaces): topics:/motor_cmd, /joint_state
+}
+
+' =========================
+' Perception
+' =========================
+
+table(SensorFusion) {
+  primary_key(component): Sensor Fusion <<Component>>
+  --
+  column(role): Combine raw sensors (IMU, Lidar, encoders)
+  column(api): Produce consistent, time-aligned measurements
+  column(interfaces): topics:/imu, /lidar, /wheel_odom
+}
+
+table(ObjectDetection) {
+  primary_key(component): Object Detection <<Component>>
+  --
+  column(role): Detect obstacles and objects from sensor data
+  column(api): Publish detections to Behavior Manager
+  column(interfaces): topics:/detections, /camera
+}
+
+table(Mapping) {
+  primary_key(component): Mapping <<Component>>
+  --
+  column(role): Build and update environment map
+  column(api): Provide map to planners and localization
+  column(interfaces): topics:/map, /scan
+}
+
+' =========================
+' Hardware Abstraction
+' =========================
+
+table(SensorInterface) {
+  primary_key(component): Sensor Interface <<Interface>>
+  --
+  column(role): Unified access to all sensors (real or simulated)
+  column(api): read_imu(), read_lidar(), read_encoders()
+  column(implementation): wraps IMUDriver, LidarDriver, EncoderDriver
+}
+
+table(ActuatorInterface) {
+  primary_key(component): Actuator Interface <<Interface>>
+  --
+  column(role): Unified access to actuators/motors
+  column(api): set_joint_target(), set_wheel_speed()
+  column(implementation): wraps MotorDriver and other drivers
+}
+
+table(SystemTime) {
+  primary_key(component): System Time <<Service>>
+  --
+  column(role): Provide consistent time reference
+  column(api): now(), sleep_until()
+  column(usage): Used by controllers and estimators
+}
+
+' =========================
+' Simulation / Middleware
+' =========================
+
+table(SimulatorNode) {
+  primary_key(component): Simulator Node <<Component>>
+  --
+  column(role): Publish simulated sensor and state data
+  column(api): Emulate robot + environment
+  column(interfaces): topics:/sim/*, /clock
+}
+
+table(MiddlewareBus) {
+  primary_key(component): Middleware Bus <<ROS2/DDS>>
+  --
+  column(role): Transport messages between nodes
+  column(api): pub/sub topics, services, actions
+  column(implementation): ROS2, DDS, or similar
+}
+
+' =========================
+' Hardware Drivers
+' =========================
+
+table(MotorDriver) {
+  primary_key(component): Motor Driver <<Driver>>
+  --
+  column(role): Low-level motor command interface
+  column(api): write_pwm(), read_current()
+  column(hardware): Motors
+}
+
+table(IMUDriver) {
+  primary_key(component): IMU Driver <<Driver>>
+  --
+  column(role): Read IMU measurements
+  column(api): read_accel(), read_gyro()
+  column(hardware): IMU
+}
+
+table(LidarDriver) {
+  primary_key(component): Lidar Driver <<Driver>>
+  --
+  column(role): Read Lidar scans
+  column(api): read_scan()
+  column(hardware): Lidar
+}
+
+' =========================
+' Physical Hardware
+' =========================
+
+table(Motors) {
+  primary_key(component): Motors <<HW>>
+  --
+  column(type): DC/BLDC motors
+  column(interface): PWM / CAN / EtherCAT
+}
+
+table(IMU_HW) {
+  primary_key(component): IMU <<HW>>
+  --
+  column(type): 6/9 DOF IMU
+  column(interface): I2C / SPI / CAN
+}
+
+table(Lidar_HW) {
+  primary_key(component): Lidar <<HW>>
+  --
+  column(type): 2D/3D Lidar
+  column(interface): Ethernet / Serial
+}
+
+' =========================
+' Relationships (like PK/FK)
+' =========================
+
+' Application → Decision/Planning
+TeleopUI }|..|| MissionManager
+MissionManager }|..|| MissionPlanner
+MissionPlanner }|..|| PathPlanner
+MissionPlanner }|..|| BehaviorManager
+MonitoringDashboard }|..|| StateEstimator
+
+' Decision/Planning → Control & Estimation
+BehaviorManager }|..|| HighLevelController
+PathPlanner }|..|| HighLevelController
+HighLevelController }|..|| LowLevelController
+StateEstimator }|..|| HighLevelController
+
+' Perception → Estimation / Planning
+SensorFusion }|..|| StateEstimator
+SensorFusion }|..|| Mapping
+ObjectDetection }|..|| BehaviorManager
+Mapping }|..|| MissionPlanner
+
+' Abstraction → Drivers
+SensorInterface }|..|| IMUDriver
+SensorInterface }|..|| LidarDriver
+ActuatorInterface }|..|| MotorDriver
+
+' Drivers → Hardware
+MotorDriver }|..|| Motors
+IMUDriver }|..|| IMU_HW
+LidarDriver }|..|| Lidar_HW
+
+' Simulation path
+SimulatorNode }|..|| MiddlewareBus
+MiddlewareBus }|..|| SensorInterface
+MiddlewareBus }|..|| ActuatorInterface
+
+@enduml

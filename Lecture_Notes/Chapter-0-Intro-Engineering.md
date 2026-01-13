@@ -6,7 +6,7 @@ math: mathjax
 backgroundColor: #fff
 ---
 
-# Chapter 1: Introduction to Engineering Software for Mechatronic Systems
+# Chapter 0: Introduction to Engineering Software for Mechatronic Systems
 
 ---
 

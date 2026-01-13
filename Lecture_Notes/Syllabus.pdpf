@@ -1,0 +1,274 @@
+<h2 id="course-information">Course Information</h2>
+<p><strong>Course Title:</strong> Programming Method 2 – Object-Oriented Control of Mechatronic Systems<br />
+<strong>Programs:</strong> Mechatronics Engineering, Robotics, Automation<br />
+<strong>Programming Language:</strong> Python<br />
+<strong>Tool:</strong> MuJoco, Git, Google Colab</p>
+<hr />
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Students are expected to have completed:</p>
+<ul>
+<li>Programming Method 1 (C or Python)</li>
+<li>Basic control theory concepts</li>
+<li>Basic knowledge of sensors and actuators</li>
+</ul>
+<hr />
+<h2 id="course-description">Course Description</h2>
+<p>This course introduces object-oriented programming (OOP) not merely as a syntax, but as a rigorous <strong>Engineering Practice Focus</strong> for controlling complex mechatronic systems. In an industrial environment, software is rarely written from scratch and never exists in isolation; therefore, this course simulates the <strong>professional lifecycle of an engineer.</strong></p>
+<h3 id="from-scripting-to-system-architecture">1. From Scripting to System Architecture</h3>
+<p>Students transition from writing “disposable” scripts to developing <strong>production-grade software</strong>. The focus is on creating systems that are: * <strong>Maintainable:</strong> Code that can be understood by other engineers six months later. * <strong>Extensible:</strong> Architectures that allow adding a new sensor or a multiple axes to a robot without rewriting the core logic.</p>
+<h3 id="the-software-hardware-contract">2. The Software-Hardware Contract</h3>
+<p>A central theme is the <strong>Hardware Abstraction Layer (HAL)</strong>. Engineers will learn to design “contracts” (interfaces) that decouple the high-level control logic from the specific electrical hardware.</p>
+<h3 id="professional-workflow-and-tooling">3. Professional Workflow and Tooling</h3>
+<p>To prepare for a career in robotics or embedded systems, students will operate within a <strong>modern DevOps ecosystem</strong>. This includes: * <strong>Version Control (Git):</strong> Managing features via branches and disciplined commit history. * <strong>Automated Verification:</strong> Shifting from “manual testing” to <strong>Unit and Integration Testing</strong> using <code>pytest</code>. Students learn that “if it isn’t tested, it is broken.” * <strong>Code Quality:</strong> Enforcing industry style guides and utilizing static analysis to catch bugs before they ever reach the physical hardware.</p>
+<h3 id="deterministic-logic-and-safety">4. Deterministic Logic and Safety</h3>
+<p>Unlike web development, mechatronic software can cause physical harm. We emphasize <strong>Automata-based design (FSMs)</strong> to ensure the system is always in a known, deterministic state. Students will learn to model safety interlocks and error states as first-class citizens in their software architecture.</p>
+<h3 id="transferability-and-language-agnostic-design">5. Transferability and Language Agnostic Design</h3>
+<p>While Python is the implementation vehicle, the <strong>architectural patterns</strong> (State Pattern, Dependency Injection, Observer Pattern) are taught with a view toward <strong>C++ and ROS-based (Robot Operating System)</strong> environments. This ensures that the mental models developed here are directly applicable to high-performance industrial control and autonomous systems.</p>
+<hr />
+<h2 id="course-learning-outcomes-clos">Course Learning Outcomes (CLOs)</h2>
+<p>By the end of the course, students will be able to:</p>
+<ol type="1">
+<li>Model technical systems using software variables and internal states</li>
+<li>Implement automata-based (finite state machine) control systems</li>
+<li>Design object-oriented architectures for sensors and actuators</li>
+<li>Apply abstraction and polymorphism to achieve hardware-independent control</li>
+<li>Use Python containers and algorithms professionally for data processing</li>
+<li>Verify software using unit, module, and system-level tests</li>
+<li>Use professional development tools such as Git, debuggers, build and test systems</li>
+</ol>
+<hr />
+<h2 id="teaching-and-learning-methods">Teaching and Learning Methods</h2>
+<ul>
+<li>Lectures with engineering-focused explanations</li>
+<li>Weekly structured laboratory sessions</li>
+<li>System modeling and design before coding</li>
+<li>Incremental project-based learning</li>
+<li>Code walkthroughs and oral explanations</li>
+<li><strong>AI tools may be used for conceptual explanation only.</strong></li>
+<li><strong>AI-generated code, logic, or architectural designs are not permitted unless explicitly stated.</strong></li>
+<li><strong>Students must be able to explain, derive, and modify all submitted code.</strong></li>
+</ul>
+<hr />
+<h2 id="software-and-tools">Software and Tools</h2>
+<ul>
+<li>Python 3.10+</li>
+<li>Virtual environments (venv)</li>
+<li>Git for version control</li>
+<li>pytest for unit testing</li>
+<li>black for formatting</li>
+<li>logging module for runtime diagnostics</li>
+<li>Debugger (VSCode IDE)</li>
+</ul>
+<h2 id="assessment-breakdown">Assessment Breakdown</h2>
+<ul>
+<li><strong>Final project (code, tests, report): 20%</strong></li>
+<li><strong>Final writing exam: 80%</strong></li>
+</ul>
+<hr />
+<h2 id="books-and-references">Books and References</h2>
+<h3 id="software-craftsmanship-and-clean-code">1. Software Craftsmanship and Clean Code</h3>
+<ul>
+<li><strong>Clean Code: A Handbook of Agile Software Craftsmanship</strong> <em>Author:</em> Robert C. Martin<br />
+<em>Focus:</em> Essential for learning professional naming conventions, function design, and the “Boy Scout Rule” of leaving code cleaner than you found it.</li>
+</ul>
+<h3 id="system-modeling-and-architecture">2. System Modeling and Architecture</h3>
+<ul>
+<li><strong>Software Modeling and Design: UML, Use Cases, Patterns, and Software Architectures</strong> <em>Author:</em> Hassan Gomaa<br />
+<em>Focus:</em> Provides the theoretical foundation for modeling complex systems using UML and architectural patterns before implementation.</li>
+</ul>
+<h3 id="advanced-implementation-python">3. Advanced Implementation (Python)</h3>
+<ul>
+<li><strong>Fluent Python: Clear, Concise, and Effective Programming</strong> <em>Author:</em> Luciano Ramalho<br />
+<em>Focus:</em> The definitive guide to using Python’s core features (data models, interfaces, and concurrency) in a professional, “pythonic” way.</li>
+</ul>
+<h3 id="robotics-and-control-integration">4. Robotics and Control Integration</h3>
+<ul>
+<li><strong>Robotics for Programmers</strong> <em>Author:</em> Andreas Bihlmaier<br />
+<em>Focus:</em> Bridges the gap between traditional robotics (math/physics) and modern software engineering practices.</li>
+</ul>
+<h3 id="supplemental-resources-tools">5. Supplemental Resources (Tools)</h3>
+<ul>
+<li><strong>Pro Git</strong> (Scott Chacon and Ben Straub) – Available for free at <a href="https://git-scm.com/book/en/v2">git-scm.com</a>.</li>
+<li><strong>Official MuJoCo Documentation</strong> – For simulation and physics-based modeling.</li>
+</ul>
+<hr />
+<h2 id="course-schedule">Course Schedule</h2>
+<h3 id="chapter-0-introduction-to-engineering-software-for-mechatronic-systems">Chapter 0 – Introduction to Engineering Software for Mechatronic Systems</h3>
+<p><strong>Lecture Topics</strong></p>
+<ul>
+<li>Role of software in mechatronic systems</li>
+<li>Difference between scripting and control software</li>
+<li>Review of procedural vs object-oriented programming</li>
+<li>Git workflows and version control discipline</li>
+<li>Static analysis and type checking</li>
+<li>Debugging techniques</li>
+</ul>
+<p><strong>Laboratory</strong> - Development environment setup - Git repository initialization - Python project structure</p>
+<p><strong>Deliverable</strong> - Tooling and debugging report - Verified development environment and Git repository</p>
+<h1 id="chapter-2-modeling-technical-variables">Chapter 2 – Modeling Technical Variables</h1>
+<p><strong>Lecture Topics</strong> - Translating physical systems into software variables - Inputs, outputs, internal states, and constraints - Naming, units, and responsibility</p>
+<p><strong>Laboratory</strong> - Variable analysis for a real system (e.g., servo motor on mujoco simulation)</p>
+<p><strong>Deliverable</strong> - Technical Variable Table (approved before coding)</p>
+<hr />
+<h1 id="chapter-3-system-decomposition-and-class-responsibility">Chapter 3 – System Decomposition and Class Responsibility</h1>
+<p><strong>Lecture Topics</strong> - Functional decomposition - Identifying classes from system components - Single responsibility principle</p>
+<p><strong>Laboratory</strong> - Component and responsibility diagrams - Initial class identification</p>
+<p><strong>Deliverable</strong> - Class responsibility document</p>
+<hr />
+<h1 id="chapter-4-automata-and-finite-state-machines-fsm">Chapter 4 – Automata and Finite State Machines (FSM)</h1>
+<p><strong>Lecture Topics</strong> - FSM concepts: states, events, transitions, guards - Deterministic behavior in control systems - State diagrams</p>
+<p><strong>Laboratory</strong> - FSM modeling on paper and diagrams - Peer review of FSM logic</p>
+<p><strong>Deliverable</strong> - FSM diagram (mandatory approval)</p>
+<hr />
+<h1 id="chapter-5-implementing-state-machines-in-python">Chapter 5 – Implementing State Machines in Python</h1>
+<p><strong>Lecture Topics</strong> - State representation using enums - Transition logic and state integrity - Introduction to the State design pattern</p>
+<p><strong>Laboratory</strong> - FSM implementation in Python - Debugging invalid transitions</p>
+<p><strong>Deliverable</strong> - Working FSM module with tests</p>
+<hr />
+<h1 id="chapter-6-sensors-and-actuators-as-software-objects">Chapter 6 – Sensors and Actuators as Software Objects</h1>
+<p><strong>Lecture Topics</strong> - Sensors as data providers - Interface-based design using abstract base classes - Simulation vs real sensors - Actuators as command receivers - Safety and limits in actuator software - Separation of control logic and hardware access</p>
+<p><strong>Laboratory</strong> - Sensor interface definition - Simulated sensor implementations - Actuator interface and implementations - Polymorphic actuator usage</p>
+<p><strong>Deliverable</strong> - Sensor class hierarchy - Actuator abstraction and implementation</p>
+<hr />
+<h1 id="chapter-7-system-integration-data-processing-and-algorithms">Chapter 7 – System Integration, Data Processing and Algorithms</h1>
+<p><strong>Lecture Topics</strong> - Controller–sensor–actuator interaction - Dependency inversion - Lists, dictionaries, sets - Sorting, filtering, and aggregation - Algorithmic thinking in control software</p>
+<p><strong>Laboratory</strong> - Integration of FSM, sensors, and actuators - Refactoring for clarity and testability - Managing multiple sensors and actuators - Data processing using Python standard library</p>
+<p><strong>Deliverable</strong> - Integrated control subsystem - Data processing module</p>
+<hr />
+<h1 id="chapter-8-case-study-modeling-and-kinematics-of-a-simple-robot-arm">Chapter 8 – Case study: Modeling and Kinematics of a Simple Robot Arm</h1>
+<h3 id="chapter-objectives">Chapter Objectives</h3>
+<p>After completing this chapter, students will be able to:</p>
+<ul>
+<li>Understand the kinematic structure of a simple robot arm</li>
+<li>Identify joints, links, and degrees of freedom</li>
+<li>Translate physical geometry into software models</li>
+<li>Represent joint configurations using vectors and constraints</li>
+<li>Implement forward kinematics for a simple articulated mechanism</li>
+<li>Verify kinematic correctness through simulation and testing</li>
+</ul>
+<h3 id="lecture-topics">Lecture Topics</h3>
+<h4 id="robot-arm-as-an-engineering-system">1. Robot Arm as an Engineering System</h4>
+<ul>
+<li>Degrees of freedom (DOF)</li>
+<li>Joint types: revolute and prismatic</li>
+<li>Link–joint relationships</li>
+<li>Workspace vs configuration space</li>
+<li>Assumptions and simplifications for educational robot arms</li>
+</ul>
+<h4 id="mathematical-modeling-for-software">2. Mathematical Modeling for Software</h4>
+<ul>
+<li>Joint variables as software states</li>
+<li>Vector representation of joint positions</li>
+<li>Units, limits, and constraints</li>
+<li>Separation of model, algorithm, and controller</li>
+</ul>
+<h4 id="forward-kinematics-conceptual-level">3. Forward Kinematics (Conceptual Level)</h4>
+<ul>
+<li>Purpose of forward kinematics</li>
+<li>Geometric interpretation (planar 2-DOF arm)</li>
+<li>Incremental computation using joint angles</li>
+<li>Numerical implementation without symbolic math libraries</li>
+</ul>
+<h3 id="laboratory">Laboratory</h3>
+<h4 id="lab-8.1-modeling-a-simple-robot-arm">Lab 8.1 – Modeling a Simple Robot Arm</h4>
+<ul>
+<li>Define joint and link parameters</li>
+<li>Create a software representation of a planar robot arm</li>
+<li>Define joint limits and initial states</li>
+</ul>
+<h4 id="lab-8.2-implementing-forward-kinematics">Lab 8.2 – Implementing Forward Kinematics</h4>
+<ul>
+<li>Implement forward kinematics for a 2-DOF planar arm</li>
+<li>Verify correctness via simulation visualization</li>
+<li>Compare expected vs computed end-effector positions</li>
+</ul>
+<h3 id="deliverables">Deliverables</h3>
+<ul>
+<li>Robot arm software model (classes and documentation)</li>
+<li>Forward kinematics algorithm implementation</li>
+<li>Unit tests validating kinematic correctness</li>
+</ul>
+<h1 id="chapter-9-case-study-motion-algorithms-and-control-integration-for-robot-arms">Chapter 9 – Case study: Motion Algorithms and Control Integration for Robot Arms</h1>
+<h3 id="chapter-objectives-1">Chapter Objectives</h3>
+<p>After completing this chapter, students will be able to:</p>
+<ul>
+<li>Implement basic motion algorithms for articulated mechanisms</li>
+<li>Design reusable, object-oriented motion algorithms</li>
+<li>Handle physical constraints and safety in software</li>
+<li>Integrate motion algorithms with FSMs, sensors, and actuators</li>
+<li>Validate motion behavior through simulation and testing</li>
+</ul>
+<h3 id="lecture-topics-1">Lecture Topics</h3>
+<h4 id="simple-motion-algorithms">1. Simple Motion Algorithms</h4>
+<ul>
+<li>Point-to-point joint motion</li>
+<li>Linear interpolation in joint space</li>
+<li>Time-based vs step-based motion</li>
+<li>Velocity and acceleration constraints</li>
+<li>Saturation and safety handling</li>
+</ul>
+<h4 id="algorithm-design-in-object-oriented-form">2. Algorithm Design in Object-Oriented Form</h4>
+<ul>
+<li>Algorithm as a class with inputs, internal state, and outputs</li>
+<li>Stateless vs stateful algorithms</li>
+<li>Strategy pattern for motion algorithms</li>
+</ul>
+<h4 id="error-handling-and-robustness">3. Error Handling and Robustness</h4>
+<ul>
+<li>Invalid target configurations</li>
+<li>Joint limit violations</li>
+<li>Numerical instability</li>
+<li>Safe fallback behavior</li>
+</ul>
+<h4 id="integration-with-control-architecture">4. Integration with Control Architecture</h4>
+<ul>
+<li>FSM-driven motion execution</li>
+<li>Actuator command abstraction</li>
+<li>System-level behavior observation</li>
+</ul>
+<h3 id="laboratory-1">Laboratory</h3>
+<h4 id="lab-9.1-joint-space-motion-algorithm">Lab 9.1 – Joint-Space Motion Algorithm</h4>
+<ul>
+<li>Implement a joint-space interpolation algorithm</li>
+<li>Enforce joint limits and smooth motion</li>
+</ul>
+<h4 id="lab-9.2-integration-with-fsm-and-actuators">Lab 9.2 – Integration with FSM and Actuators</h4>
+<ul>
+<li>Integrate motion algorithm into FSM</li>
+<li>Connect outputs to actuator interfaces</li>
+<li>Observe behavior in MuJoCo simulation</li>
+</ul>
+<h3 id="deliverables-1">Deliverables</h3>
+<ul>
+<li>Joint-space motion algorithm module</li>
+<li>Integrated FSM-controlled robot arm simulation</li>
+</ul>
+<h1 id="chapter-11-final-project-integration-and-review">Chapter 11 – Final Project Integration and Review</h1>
+<p><strong>Lecture Topics</strong> - Architecture review - Common design mistakes in control software - Preparation for final defense</p>
+<p><strong>Laboratory</strong> - Final project integration - Instructor-led design review</p>
+<p><strong>Deliverable</strong> - Final project code freeze</p>
+<hr />
+<h1 id="chapter-12-final-evaluation">Chapter 12 – Final Evaluation</h1>
+<p><strong>Assessment</strong> - Project demonstration - Oral defense and design explanation - Code walkthrough and testing review</p>
+<hr />
+<h2 id="assessment-breakdown-1">Assessment Breakdown</h2>
+<ul>
+<li>Final project (code, tests, report): 20%</li>
+<li>Final writing exam: 80%</li>
+</ul>
+<hr />
+<h2 id="academic-integrity-policy">Academic Integrity Policy</h2>
+<ul>
+<li>AI-assisted code generation is not permitted</li>
+<li>All submitted code must be explainable by the student</li>
+<li>Inability to explain submitted code may result in failure</li>
+</ul>
+<hr />
+<h2 id="expected-graduate-attributes">Expected Graduate Attributes</h2>
+<p>Upon successful completion, students will demonstrate:</p>
+<ul>
+<li>Engineering-level software modeling skills</li>
+<li>Object-oriented design competence</li>
+<li>Professional verification and tooling discipline</li>
+<li>Readiness for advanced robotics, embedded systems, and ROS-based development</li>
+</ul>

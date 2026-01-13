@@ -209,6 +209,8 @@ Bad example:
   - Logs data
   - Handles UI
 
+---
+
 Issues:
 - Many reasons to change
 - Hard to test in isolation
