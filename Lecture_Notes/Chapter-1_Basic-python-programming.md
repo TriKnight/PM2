@@ -6,7 +6,7 @@ math: mathjax
 backgroundColor: #fff
 ---
 
-# Basic Python Programming
+# Chapter 1. Basic Python Programming
 ## For Mechatronic Systems Development
 
 ---
@@ -814,7 +814,7 @@ def clamp(value: float, min_val: float, max_val: float) -> float:
 
 ---
 
-```
+```python
 # File: main.py
 from sensor_math import average, clamp
 readings = [0.9, 1.0, 1.1, 0.95]
@@ -879,8 +879,6 @@ print(math.sin(angle_rad))
 
 ## Standard Library: datetime
 
-- Work with dates and times
-
 ```python
 from datetime import datetime, timedelta
 
@@ -901,6 +899,246 @@ start = datetime.now()
 # ... do something ...
 duration = datetime.now() - start
 print(f"Duration: {duration.total_seconds()} seconds")
+```
+
+---
+## Standard Library: numpy
+
+NumPy (Numerical Python) is an open source Python library that’s widely used in science and engineering. The NumPy library contains multidimensional array data structures, such as the homogeneous, N-dimensional ndarray, and a large library of functions that operate efficiently on these data structures.
+Beneath the NumPy library is a highly optimized core written in C and Fortran.
+
+- NumPy is significantly faster than standard Python lists for large datasets.
+- NumPy is the industry standard for robotics, simulation, and data science because of its reliability.
+
+---
+
+NumPy ``ndarray`` (N-Dimensional Array)
+
+An array is a data structure used for storing and retrieving data, visualized as a grid of cells.
+
+- 1D Array: Visualized as a single list.
+- 2D Array: Visualized as a table with rows and columns.
+- 3D Array: Visualized as a stack of tables (like pages).
+- ND Array: NumPy generalizes this concept to any number of dimensions.
+
+---
+
+## 1. 1D Array (Vector)
+
+Visualized as a single row or list of data, such as a time series or a sequence of sensor readings.
+
+```python
+import numpy as np
+
+# A 1D array representing 5 seconds of time
+time_data = np.array([0.0, 1.0, 2.0, 3.0, 4.0])
+
+print(f"1D Array: {time_data}")
+print(f"Shape: {time_data.shape}") # Output: (5,)
+```
+
+---
+
+## 2. 2D Array (Matrix)
+
+Visualized as a table with rows and columns. This is commonly used for coordinate transformations or state-space matrices in control systems.
+
+```python
+# A 2D array representing (x, y) coordinates for 3 robots
+robot_coords = np.array([
+    [0.5, 1.2],
+    [2.3, 0.8],
+    [1.1, 3.4]
+])
+
+print(f"2D Array:\n{robot_coords}")
+print(f"Shape: {robot_coords.shape}") # Output: (3, 2)
+```
+
+---
+
+## 3. 3D Array (Tensor)
+
+Visualized as a stack of tables (like pages). In mechatronics, this could represent a sequence of camera frames over time or data from multiple sensors over multiple time steps.
+
+```python
+# A 3D array: 2 pages, each containing a 2x3 grid
+# (e.g., 2 different sensor stations, each reading 3 axes over 2 time steps)
+sensor_volume = np.zeros((2, 2, 3)) 
+
+print(f"3D Array Shape: {sensor_volume.shape}") # Output: (2, 2, 3)
+```
+
+---
+
+## Understanding NumPy Array Attributes
+
+Array attributes allow you to inspect the structure and data properties of an ndarray. These are essential for debugging mechatronic data streams and control matrices.
+
+- ``ndim``: The number of dimensions (axes) of the array. (e.g., 1 for a vector, 2 for a matrix).
+
+- ``shape``: A tuple of integers indicating the size of the array in each dimension. For a 2D array of n rows and m columns, the shape is (n,m).
+
+- ``size``: The total number of elements in the array. This is equal to the product of the elements of the shape.
+
+- ``dtype``: The data type of the elements (e.g., int64, float64). All elements in a NumPy array must be of the same type (homogeneous).
+
+---
+### Python Example: Inspecting Mechatronic Data
+
+```python
+import numpy as np
+
+# Create a 2D array representing sensor data 
+# (3 rows for time steps, 2 columns for Sensor A and Sensor B)
+sensor_data = np.array([
+    [25.4, 10.1], 
+    [25.5, 10.2], 
+    [25.3, 10.1]
+], dtype=np.float64)
+
+# 1. Number of dimensions
+print(f"Dimensions (ndim): {sensor_data.ndim}")  
+# Output: 2
+
+# 2. Shape (rows, columns)
+print(f"Shape: {sensor_data.shape}")            
+# Output: (3, 2)
+
+# 3. Total number of elements
+print(f"Total Size: {sensor_data.size}")        
+# Output: 6
+
+# 4. Data type
+print(f"Data Type (dtype): {sensor_data.dtype}")  
+# Output: float64
+```
+
+---
+
+### Adding and Sorting Elements
+
+Efficiently managing data order and combining datasets are core tasks in engineering software.
+
+- ``np.sort()``: Quickly sorts elements in ascending order. You can specify the axis, kind (algorithm), and order.
+
+- ``np.concatenate()``: Joins a sequence of arrays along an existing axis to combine sensor data streams.
+
+
+---
+
+## Example
+
+```python
+import numpy as np
+
+# Initial Array
+arr = np.array([2, 1, 5, 3, 7, 4, 6, 8])
+# Sorting an array
+sorted_arr = np.sort(arr) 
+# Result: [1, 2, 3, 4, 5, 6, 7, 8]
+# A 2D array: each row represents a different sensor
+matrix = np.array([[3, 1, 2], 
+                   [6, 4, 5]])
+# Sort along axis 1 (horizontal / rows)
+row_sorted = np.sort(matrix, axis=1)
+print("Row Sorted:\n", row_sorted)
+# Output: [[1, 2, 3], [4, 5, 6]]
+
+# Sort along axis 0 (vertical / columns)
+col_sorted = np.sort(matrix, axis=0)
+print("Column Sorted:\n", col_sorted)
+# Output: [[3, 1, 2], [6, 4, 5]]
+
+# Concatenating arrays
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+combined = np.concatenate((a, b))
+# Result: [1, 2, 3, 4, 5, 6]
+```
+
+---
+
+## Key Rules for Reshaping
+
+NumPy using the ``arr.reshape()`` method. Reshaping allows you to change the shape (dimensions) of an array without changing its underlying data.
+
+- Total Size Consistency: The total number of elements (the size) must remain the same. For example, a 1D array with 12 elements can be reshaped into a 3×4 or 2×6 matrix, but not a 3×5 matrix.
+
+- Data Integrity: Reshaping does not modify the data; it only changes how the data is viewed/indexed.
+
+
+---
+
+## Example reshaping
+```python
+import numpy as np
+
+# 1. Create a 1D array of 12 elements (e.g., raw readings)
+raw_readings = np.arange(12) 
+# Result: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+# 2. Reshape to a 2D array (3 rows, 4 columns)
+# This could represent 3 sensors taking 4 readings each
+sensor_matrix = raw_readings.reshape(3, 4)
+
+print("Original 1D Array:\n", raw_readings)
+print("\nReshaped 2D Matrix:\n", sensor_matrix)
+
+# 3. Reshape to a 3D array (2 pages, 3 rows, 2 columns)
+# Represents 2 sensor stations, 3 time steps, 2 axes each
+volumetric_data = raw_readings.reshape(2, 3, 2)
+
+print("\nReshaped 3D Tensor:\n", volumetric_data)
+
+```
+
+---
+## Indexing and slicing
+
+Indexing and slicing in NumPy are fundamental techniques for accessing and extracting specific parts of your data, whether it is a single sensor reading or a batch of coordinate values.
+![Arrary](./figs/chapter1/data_array.png)
+
+---
+
+**1D Array Indexing and Slicing**
+
+```python
+import numpy as np
+# Create an array of 10 elements
+arr = np.array([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
+
+# --- Indexing ---
+print(arr[0])      # Access first element (10)
+print(arr[-1])     # Access last element (100)
+
+# --- Slicing [start:stop:step] ---
+print(arr[2:5])    # Elements from index 2 to 4: [30, 40, 50]
+print(arr[:3])     # First three elements: [10, 20, 30]
+print(arr[::2])    # Every second element: [10, 30, 50, 70, 90]
+```
+
+---
+
+**2D Array Indexing and Slicing**
+```python
+# A 2D array representing a 3x3 coordinate matrix
+# Rows: Time steps, Columns: [X, Y, Z]
+data = np.array([
+    [1.1, 1.2, 1.3],
+    [2.1, 2.2, 2.3],
+    [3.1, 3.2, 3.3]
+])
+
+# --- Indexing ---
+print(data[0, 1])    # Access row 0, column 1: (1.2)
+print(data[2, 2])    # Access row 2, column 2: (3.3)
+
+# --- Slicing ---
+# Syntax: [row_slice, column_slice]
+print(data[0:2, :])  # First two rows, all columns
+print(data[:, 0])    # All rows, but only the first column (X-coordinates)
+print(data[1:, 1:])  # A sub-matrix starting from row 1 and column 1
 ```
 
 ---

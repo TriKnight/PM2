@@ -166,7 +166,7 @@ class MotorController:
 ### System Overview
 
 <p align="center">
-  <img src="../figs/controller_software_chap2.png" width="50%">
+  <img src="./figs/controller_software_chap2.png" width="50%">
 </p>
 ---
 

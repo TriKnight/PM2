@@ -163,12 +163,80 @@ while True:
 - Focus on **objects** and their interactions
 
 ### Core Principles
+- **Abstraction** - Simplify complex systems
 - **Encapsulation** - Hide complexity
 - **Inheritance** - Share common behavior
 - **Polymorphism** - Flexible interfaces
-- **Abstraction** - Simplify complex systems
+
 
 ---
+
+## Encapsulation & Abstraction Example
+Encapsulation bundles the data (reading) and methods (calibrate) together, while Abstraction hides the complex math inside a simple method call.
+
+```python
+class Sensor:
+    def __init__(self, name):
+        self.name = name
+        self.__offset = 0.5  # Encapsulation: Private variable (hidden)
+
+    def get_calibrated_value(self, raw_value):
+        # Abstraction: User doesn't need to know the formula
+        return raw_value - self.__offset
+
+temp_sensor = Sensor("TMP36")
+print(temp_sensor.get_calibrated_value(25.8))
+
+```
+
+---
+
+## Inheritance Example
+
+Inheritance allows a specific type of sensor to "inherit" the properties of a general sensor without rewriting code.
+
+```python
+
+class UltrasonicSensor(Sensor):
+    def __init__(self, name, pin):
+        super().__init__(name) # Inherit from parent
+        self.pin = pin
+
+    def ping(self):
+        return "Sending sonic pulse..."
+
+dist_sensor = UltrasonicSensor("HC-SR04", 12)
+print(dist_sensor.name) # Accessed from parent
+print(dist_sensor.ping()) # Own unique method
+```
+
+---
+
+## Polymorphism
+
+Polymorphism allows different objects to be treated the same way. In mechatronics, you might want to "read" all sensors in a loop, regardless of whether they are Temperature, Pressure, or Light sensors.
+
+```python
+
+class TemperatureSensor:
+    def read(self):
+        return "24°C"
+
+class PressureSensor:
+    def read(self):
+        return "101.3 kPa"
+
+# Polymorphism in action
+sensors = [TemperatureSensor(), PressureSensor()]
+
+for s in sensors:
+    print(s.read()) # Same method name, different behaviors
+
+```
+
+---
+
+
 
 ## Object-Oriented Programming Example
 
@@ -246,6 +314,15 @@ git --version
 mkdir mechatronics-lab
 cd mechatronics-lab
 ```
+
+---
+# How git command works
+
+<div style="text-align: center;">
+
+![width:550px](./figs/chapter0/0202-git-commands.png)
+
+</div>
 
 ---
 
@@ -447,19 +524,6 @@ git log --oneline
 
 ---
 
-## What's Next?
-
-### Upcoming Topics
-- Chapter 2:
-
-
-### Recommended Reading
-- "Robotics for Programmers" - Software design patterns
-- "Clean Code" - Writing professional software
-- "Fluent Python" - Advanced Python techniques
-
----
-
 ## Summary
 
 ### Key Takeaways
@@ -537,20 +601,16 @@ git config --global user.email "your.email@example.com"
 **Solution:** Ensure `__init__.py` exists in package directories
 
 ---
+## Recommended Reading
+- **Clean Code: A Handbook of Agile Software Craftsmanship** Robert C. Martin  
 
-## Additional Resources
+- **Software Modeling and Design: UML, Use Cases, Patterns, and Software Architectures** Hassan Gomaa  
 
-### Books
-- **"Clean Code"** - Robert C. Martin
-- **"Robotics for Programmers"** - Timothy Repp
-- **"Fluent Python"** - Luciano Ramalho
+- **Fluent Python: Clear, Concise, and Effective Programming** Luciano Ramalho  
+
+- **Robotics, Vision and Control: Fundamental Algorithms in Python** Peter Corke
 
 ### Online
 - Real Python: https://realpython.com
 - Python official docs: https://docs.python.org
 - GitHub Learning: https://github.com/skills
-
-### Practice
-- LeetCode: Algorithm practice
-- HackerRank: Coding challenges
-- GitHub: Contribute to open source
