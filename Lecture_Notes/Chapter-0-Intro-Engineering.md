@@ -163,37 +163,163 @@ while True:
 - Focus on **objects** and their interactions
 
 ### Core Principles
-- **Abstraction** - Simplify complex systems
-- **Encapsulation** - Hide complexity
+- **Abstraction** - Simplify complex systems, define what a component does
+- **Encapsulation** - Hide complexity, protect how functions works internally
 - **Inheritance** - Share common behavior
-- **Polymorphism** - Flexible interfaces
+- **Polymorphism** - Flexible interfaces, use components interchangeably
 
 
 ---
 
-## Encapsulation & Abstraction Example
-Encapsulation bundles the data (reading) and methods (calibrate) together, while Abstraction hides the complex math inside a simple method call.
+## Abstraction — Simplifying Complex Systems
+*Abstraction is the process of hiding implementation details and showing only the essential features of an object.*
+
+
+<p align="center">
+  <img src="./figs/chapter0/motor_class.png" width="80%">
+</p>
+
+
+
+---
+## Abstraction — Simplifying Complex Systems (cont)
 
 ```python
+from abc import ABC, abstractmethod # ABC is Abstract Base Class in Python
+class Motor(ABC):
+    @abstractmethod
+    def set_speed(self, rpm):
+        """Every motor MUST implement this method"""
+        pass
+    @abstractmethod
+    def stop(self):
+        """Every motor MUST implement this method"""
+        pass
+```
+
+The Motor abstract base class defines a *hardware-independent* interface for torque control. Allowing control algorithms to operate without knowledge of motor type, communication protocol, or simulation environment.
+
+---
+
+## Astraction Extended Example
+
+```python
+from abc import ABC, abstractmethod
+
+# 2. CONCRETE IMPLEMENTATION A: Stepper Motor
+class StepperMotor(Motor):
+    def set_speed(self, rpm):
+        # Hidden complexity: Step logic
+        print(f">>> [Hardware Call] Pulsing GPIO pins for {rpm} RPM.")
+        print(f"Stepper Motor: Moving at {rpm} RPM.")
+        
+    def stop(self):
+        print("Stepper Motor: Engaging holding torque and stopping.")
+
+# 3. CONCRETE IMPLEMENTATION B: DC Motor
+class DCMotor(Motor):
+    def set_speed(self, rpm):
+        # Hidden complexity: PWM (Pulse Width Modulation) logic
+        voltage = rpm * 0.01 
+        print(f">>> [Hardware Call] Setting PWM Duty Cycle to {voltage}V.")
+        print(f"DC Motor: Spinning at {rpm} RPM.")
+        
+    def stop(self):
+        print("DC Motor: Shorting terminals for dynamic braking.")
+```
+
+---
+
+## Astraction Print out result
+
+```
+--- Testing Stepper ---
+>>> [Hardware Call] Pulsing GPIO pins for 1500 RPM.
+Stepper Motor: Moving at 1500 RPM.
+Stepper Motor: Engaging holding torque and stopping.
+
+--- Testing DC Motor ---
+>>> [Hardware Call] Setting PWM Duty Cycle to 30.0V.
+DC Motor: Spinning at 3000 RPM.
+DC Motor: Shorting terminals for dynamic braking.
+```
+
+---
+
+## Encapsulation
+*Encapsulation is the bundling of data (variables) and methods that operate on the data into a single unit, usually a class.*
+
+<p align="center">
+  <img src="./figs/chapter0/encapsulation-image.jpg" width="80%">
+</p>
+
+source: https://logicmojo.com/encapsulation-in-oops
+
+---
+
+## Encapsulation Example
+Encapsulation bundles the data (name, __offset, __enable) and methods (enable, disable) together
+```python
 class Sensor:
-    def __init__(self, name):
+    def __init__(self, name: str, offset: float = 0.5):
         self.name = name
-        self.__offset = 0.5  # Encapsulation: Private variable (hidden)
+        self.__offset = offset     # private calibration parameter
+        self.__enabled = True      # private internal state
 
-    def get_calibrated_value(self, raw_value):
-        # Abstraction: User doesn't need to know the formula
-        return raw_value - self.__offset
+    def enable(self):
+        self.__enabled = True
 
-temp_sensor = Sensor("TMP36")
-print(temp_sensor.get_calibrated_value(25.8))
+    def disable(self):
+        self.__enabled = False
 
 ```
 
 ---
 
+## Encapsulation Example (Check jupyter notebook)
+```python
+class Sensor:
+    def __init__(self, name: str, offset: float = 0.5):
+        self.name = name
+        self.__offset = offset     # private calibration parameter
+        self.__enabled = True      # private internal state
+
+    def enable(self):
+        self.__enabled = True
+
+    def disable(self):
+        self.__enabled = False
+
+    def calibrate(self, new_offset: float):
+        if not isinstance(new_offset, (int, float)):
+            raise TypeError("Offset must be numeric")
+
+        if abs(new_offset) > 10.0:
+            raise ValueError("Calibration offset out of range")
+
+        self.__offset = new_offset
+
+    def get_calibrated_value(self, raw_value: float) -> float:
+        if not self.__enabled:
+            raise RuntimeError(f"Sensor {self.name} is disabled")
+        return raw_value - self.__offset
+```
+---
+
+## Inheritance 
+*Inheritance is the mechanism of basing an object or class upon another object (prototype-based inheritance) or class (class-based inheritance), retaining similar implementation.*
+
+<p align="center">
+  <img src="./figs/chapter0/inheritance.png" width="40%">
+</p>
+
+source: https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)
+
+---
+
 ## Inheritance Example
 
-Inheritance allows a specific type of sensor to "inherit" the properties of a general sensor without rewriting code.
+Inheritance allows a specific type of **Sensor** to "inherit" the properties of a general sensor without rewriting code.
 
 ```python
 
@@ -213,6 +339,20 @@ print(dist_sensor.ping()) # Own unique method
 ---
 
 ## Polymorphism
+*Polymorphism allows a value or variable to have more than one type and allows a given operation to be performed on values of more than one type.*
+
+
+<p align="center">
+  <img src="./figs/chapter0/polymorphism.png" width="60%">
+</p>
+
+source: https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)
+
+
+---
+
+
+## Polymorphism Example (check Jupyter)
 
 Polymorphism allows different objects to be treated the same way. In mechatronics, you might want to "read" all sensors in a loop, regardless of whether they are Temperature, Pressure, or Light sensors.
 
@@ -235,7 +375,23 @@ for s in sensors:
 ```
 
 ---
+## Why  Polymorphism Critical in Robotics
 
+Without polymorphism ❌:
+```
+if sensor_type == "ultrasonic":
+    read_ultrasonic()
+elif sensor_type == "temperature":
+    read_temperature()
+```
+
+
+With polymorphism ✅:
+```
+sensor.read()
+```
+
+---
 
 
 ## Object-Oriented Programming Example

@@ -903,7 +903,7 @@ print(f"Duration: {duration.total_seconds()} seconds")
 
 ---
 ## Standard Library: numpy
-
+https://numpy.org/doc/stable/user/absolute_beginners.html
 NumPy (Numerical Python) is an open source Python library that’s widely used in science and engineering. The NumPy library contains multidimensional array data structures, such as the homogeneous, N-dimensional ndarray, and a large library of functions that operate efficiently on these data structures.
 Beneath the NumPy library is a highly optimized core written in C and Fortran.
 
