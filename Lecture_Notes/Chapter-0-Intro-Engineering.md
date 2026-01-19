@@ -8,6 +8,9 @@ backgroundColor: #fff
 
 # Chapter 0: Introduction to Engineering Software for Mechatronic Systems
 
+## Author: Tri Bien Minh | tri.bm@vgu.edu.vn | 
+
+
 ---
 
 ## Learning Objectives
@@ -15,6 +18,7 @@ backgroundColor: #fff
 By the end of this chapter, you will:
 - Understand the role of software in mechatronic systems
 - Distinguish between scripting and control software
+- Object-Oriented Programming (OOP)
 - Compare procedural vs object-oriented programming paradigms
 - Set up a professional development environment
 - Initialize and manage a Git repository
@@ -151,6 +155,59 @@ while True:
     read_temperature()
     check_temperature()
 ```
+
+---
+## Why Python in Programming Method 2 (After C++ in PM1)?
+
+---
+
+## Context
+
+Students have already completed **Programming Method 1 (C++)**, including:
+
+- Variables and data types  
+- Control structures  
+- Functions and classes  
+- Compilation and memory concepts  
+
+➡️ This course **does not replace C++**  
+➡️ It **builds on that foundation**
+
+---
+
+## Programming Method 2 — Python
+
+**Focus:**  
+> *How engineers design control software systems*
+
+- Software architecture and structure  
+- Object-Oriented Programming (OOP)  
+- State modeling (FSMs)  
+- Algorithm clarity  
+- System integration  
+- Unit testing
+
+---
+
+## Why Python Is Used in This Course
+
+Python is chosen to:
+
+- Remove **accidental complexity**  
+- Reduce syntactic overhead  
+- Highlight **engineering design concepts**  
+- Focus on **correctness, structure, and reasoning**  
+
+> The goal is **better design**, not faster coding.
+
+---
+
+## Key Takeaway
+
+- **C++** teaches you *how programs run*  
+- **Python** teaches you *how systems are designed*  
+
+A professional mechatronics engineer must master **both**.
 
 ---
 
@@ -467,8 +524,8 @@ git --version
 # Output: git version 2.34.1 (or newer)
 
 # Create test directory
-mkdir mechatronics-lab
-cd mechatronics-lab
+mkdir mechatronics-lab-0
+cd mechatronics-lab-0
 ```
 
 ---
@@ -481,13 +538,23 @@ cd mechatronics-lab
 </div>
 
 ---
+# git work flow
+
+<div style="text-align: center;">
+
+![width:850px](./figs/chapter0/git_work_flow.png)
+
+</div>
+
+
+---
 
 ## Lab 2: Git Repository Initialization
 
 ### Initialize Repository
 ```bash
 # Navigate to project directory
-cd your-project-folder
+cd mechatronics-lab-0
 
 # Initialize git repository
 git init
@@ -524,7 +591,7 @@ git pull origin main         # Download updates
 
 ### Recommended Organization
 ```
-mechatronic-project/
+mechatronics-lab-0/
 ├── .git/                 # Git metadata
 ├── .gitignore            # Files to ignore
 ├── README.md             # Project description
@@ -595,13 +662,6 @@ __all__ = ['TemperatureSensor', 'MotorController']
 numpy>=1.19.0
 scipy>=1.5.0
 
-# Testing
-pytest>=6.0.0
-pytest-cov>=2.10.0
-
-# Code quality
-pylint>=2.7.0
-black>=21.0.0
 ```
 ### Installation
 ```bash
