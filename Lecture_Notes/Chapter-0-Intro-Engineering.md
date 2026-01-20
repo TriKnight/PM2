@@ -483,6 +483,146 @@ if sensor.is_valid():
 
 ---
 
+## Apply Pseudocode Before Coding in Python
+### What is Pseudocode
+Pseudocode is a **human-readable way** to describe the steps of an algorithm using programming-like structures (assignments, conditions, loops) **without strict syntax**.
+https://en.wikipedia.org/wiki/Pseudocode
+
+---
+
+
+## Pseudocode Cheat Sheet (Main Syntax)
+<div style="display: flex; gap: 16px;">
+
+<div style="flex: 1;">
+
+**Start/End Program**
+```
+BEGIN PROGRAM
+SET x ← value
+READ input
+PRINT output
+END PROGRAM
+```
+**Conditional**
+```
+IF condition THEN
+action
+ELSE
+action
+END IF
+```
+
+</div >
+
+<div style="flex: 1;">
+
+**Comparison Operators**
+```
+= ≠ < ≤ > ≥
+```
+**Loop**
+
+```
+WHILE condition DO
+action
+END WHILE
+
+FOR i ← start TO end DO
+action
+END FOR
+
+REPEAT
+action
+UNTIL condition
+```
+</div>
+
+<div style="flex: 1;">
+
+**Case Selection**
+
+```
+CASE variable OF
+value1: action
+value2: action
+DEFAULT: action
+END CASE
+```
+
+**Function**
+```
+FUNCTION name(parameters)
+statements
+RETURN value
+END FUNCTION
+
+```
+
+
+---
+
+### How We Apply Pseudocode Before Coding in Python
+- **Step 1 — Understand the Problem**
+
+    - Example problem:
+
+        ```
+        Read a temperature sensor and convert °C to °F with F = (C × 9/5) + 32
+        Ask:
+        What inputs exist?
+        What outputs are required?
+        What rules or formulas apply?
+        ```
+
+- **Step 2 — Identify Data and States**
+    
+        INPUT: temperature in Celsius
+        OUTPUT: temperature in Fahrenheit
+        #Variables
+        temperature_c
+        temperature_f
+
+---
+### How We Apply Pseudocode Before Coding in Python (cont.)
+- **Step 3 — Write the Pseudocode**
+
+        BEGIN PROGRAM
+
+
+            FUNCTION celsius_to_fahrenheit with temperature_c
+
+            READ temperature sensor → temperature_c
+            
+            temperature_f ← celsius_to_fahrenheit(temperature_c)
+
+            PRINT temperature_c and temperature_f
+
+        END PROGRAM
+
+        
+---
+# Full Pseudocode of logging simple sensor
+```
+BEGIN PROGRAM
+
+    FUNCTION celsius_to_fahrenheit(temp_c)
+        RETURN (temp_c × 9 / 5) + 32
+    END FUNCTION
+
+
+    READ temperature sensor → temperature_c
+
+    temperature_f ← celsius_to_fahrenheit(temperature_c)
+
+    PRINT "Temperature:"
+    PRINT temperature_c + " °C"
+    PRINT temperature_f + " °F"
+
+END PROGRAM
+
+```
+
 ## Procedural vs OOP: Summary
 
 | Aspect | Procedural | Object-Oriented |

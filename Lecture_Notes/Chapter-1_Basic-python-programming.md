@@ -9,6 +9,8 @@ backgroundColor: #fff
 # Chapter 1. Basic Python Programming
 ## For Mechatronic Systems Development
 
+## Author: Tri Bien Minh | tri.bm@vgu.edu.vn | 
+
 ---
 
 ## Python as a Language
@@ -19,7 +21,7 @@ backgroundColor: #fff
   - Object-oriented (classes and objects)
   - Functional (functions as first-class objects)
 - **Batteries included:** rich standard library
-- Industry standard for robotics (ROS, simulation, data science)
+- Industry standard for robotics (ROS/ROS2, simulation, data science)
 - Readable syntax that encourages clean code
 
 ---
@@ -195,6 +197,56 @@ print('y' in name)   # True
 
 ---
 
+## Example Pseudocode of logging simple sensor
+We have:
+- A temperature sensor (°C)
+
+Example 
+1. Reads sensor values
+2. Converts units function °C -> °F ```celsius_to_fahrenheit```
+with `F = (C × 9/5) + 32`
+
+---
+# Pseudocode of logging simple sensor
+```
+BEGIN PROGRAM
+
+    FUNCTION celsius_to_fahrenheit(temp_c)
+        RETURN (temp_c × 9 / 5) + 32
+    END FUNCTION
+
+
+    READ temperature sensor → temperature_c
+
+    temperature_f ← celsius_to_fahrenheit(temperature_c)
+
+    PRINT "Temperature:"
+    PRINT temperature_c + " °C"
+    PRINT temperature_f + " °F"
+
+END PROGRAM
+
+```
+
+---
+
+## Exercise 1.1 Logging simple sensor
+
+Please write Pseudocode of this logging simple sensor
+We have:
+- A temperature sensor (°C)
+- A voltage sensor (V)
+- A simple safety check
+
+The program:
+1. Reads sensor values
+2. Converts units
+3. Checks safe operating ranges
+4. Prints formatted status messages
+
+
+---
+
 ## Strings: Methods and Formatting
 
 ```python
@@ -338,15 +390,11 @@ config = {
     "max_voltage": 12.0,
     "port": "COM3",
 }
-
 # Access
 print(config["sample_rate_hz"])  # 100
 print(config["port"])            # "COM3"
-
-# Check key existence
 if "port" in config:
     print("Port is configured")
-
 # Get with default
 baudrate = config.get("baudrate", 9600)  # 9600 (default)
 ```
@@ -1316,9 +1364,6 @@ Type `import this` in Python to see the full philosophy!
 
 ## Next Chapter Preview
 
-- Chapter 4: Object-Oriented Design for Mechatronic Systems
-- Inheritance and polymorphism
-- Abstract base classes
-- Design patterns for hardware abstraction
+- Chapter 2: Modeling Technical Variables
 
 ---
