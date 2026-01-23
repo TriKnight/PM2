@@ -5,6 +5,16 @@ paginate: true
 math: mathjax
 backgroundColor: #fff
 ---
+<style>
+section::before {
+  content: url('https://vgu.edu.vn/cms-vgu-theme-4/images/cms/vgu_logo.png'); /* Your logo URL */
+  width: 20px; /* Adjust size */
+  height: auto;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+}
+</style>
 
 # Chapter 1. Basic Python Programming
 ## For Mechatronic Systems Development
@@ -919,6 +929,49 @@ print(f"Duration: {duration.total_seconds()} seconds")
 ```
 
 ---
+
+## Putting It Together: Complete Example
+
+A small system that reads sensor values and logs them.
+
+```python
+from datetime import datetime
+import time
+
+class SensorLogger:
+    """Log sensor readings with timestamp."""
+    def __init__(self, filename: str) -> None:
+        self.filename = filename
+        self.readings: list[dict] = []
+    def log(self, value: float) -> None:
+        """Record a reading."""
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "value": value,
+        }
+        self.readings.append(entry)
+    
+```
+
+---
+```python
+    def save(self) -> None:
+            """Save all readings to file."""
+            with open(self.filename, "w") as f:
+                for entry in self.readings:
+                    f.write(f"{entry['timestamp']},{entry['value']}\n")
+            print(f"Saved {len(self.readings)} readings to {self.filename}")
+# Usage
+logger = SensorLogger("sensor_log.csv")
+for i in range(5):
+    value = 1.0 + 0.1 * i
+    logger.log(value)
+    print(f"Logged: {value}")
+    time.sleep(0.1)
+logger.save()
+```
+
+---
 ## Standard Library: numpy
 https://numpy.org/doc/stable/user/absolute_beginners.html
 NumPy (Numerical Python) is an open source Python library that’s widely used in science and engineering. The NumPy library contains multidimensional array data structures, such as the homogeneous, N-dimensional ndarray, and a large library of functions that operate efficiently on these data structures.
@@ -929,7 +982,7 @@ Beneath the NumPy library is a highly optimized core written in C and Fortran.
 
 ---
 
-NumPy ``ndarray`` (N-Dimensional Array)
+**NumPy** ``ndarray`` (N-Dimensional Array)
 
 An array is a data structure used for storing and retrieving data, visualized as a grid of cells.
 
@@ -937,6 +990,15 @@ An array is a data structure used for storing and retrieving data, visualized as
 - 2D Array: Visualized as a table with rows and columns.
 - 3D Array: Visualized as a stack of tables (like pages).
 - ND Array: NumPy generalizes this concept to any number of dimensions.
+
+---
+## Visualization Tensor (multi-dimensional array of data)
+<p align="center">
+  <img src="./figs/chapter1/tensor.png" width="75%">
+</p>
+
+source: https://wandb.ai/vincenttu/intro-to-tensors
+
 
 ---
 
@@ -1160,46 +1222,133 @@ print(data[1:, 1:])  # A sub-matrix starting from row 1 and column 1
 
 ---
 
-## Putting It Together: Complete Example
+**How to create an array from existing data**
 
-A small system that reads sensor values and logs them.
+This section covers slicing and indexing
+ ``np.vstack(), np.hstack(), np.hsplit(), .view(), copy()``
 
-```python
-from datetime import datetime
-import time
+ ```python
+ a = np.array([1,  2,  3,  4,  5,  6,  7,  8,  9, 10])
+ ```
+ You can create a new array from a section of your array any time by specifying where you want to slice your array.
+ ```
+>>> arr1 = a[3:8]
+>>> arr1 
+array([4, 5, 6, 7, 8])
+ ```
 
-class SensorLogger:
-    """Log sensor readings with timestamp."""
-    def __init__(self, filename: str) -> None:
-        self.filename = filename
-        self.readings: list[dict] = []
-    def log(self, value: float) -> None:
-        """Record a reading."""
-        entry = {
-            "timestamp": datetime.now().isoformat(),
-            "value": value,
-        }
-        self.readings.append(entry)
-    
+---
+**How to create an array from existing data (cont.)** 
+You can also **stack** two existing arrays, both **vertically** and **horizontally**. Let’s say you have two arrays, a1 and a2:
+
+```
+>>> a1 = np.array([[1, 1],
+                  [2, 2]])
+
+>>> a2 = np.array([[3, 3],
+                  [4, 4]])
+```
+You can stack them vertically with ``vstack``:
+```
+np.vstack((a1, a2))
+array([[1, 1],
+       [2, 2],
+       [3, 3],
+       [4, 4]])
 ```
 
 ---
+**How to create an array from existing data (cont.)** 
+Or stack them horizontally with **hstack**
+
 ```python
-    def save(self) -> None:
-            """Save all readings to file."""
-            with open(self.filename, "w") as f:
-                for entry in self.readings:
-                    f.write(f"{entry['timestamp']},{entry['value']}\n")
-            print(f"Saved {len(self.readings)} readings to {self.filename}")
-# Usage
-logger = SensorLogger("sensor_log.csv")
-for i in range(5):
-    value = 1.0 + 0.1 * i
-    logger.log(value)
-    print(f"Logged: {value}")
-    time.sleep(0.1)
-logger.save()
+np.hstack((a1, a2))
+array([[1, 1, 3, 3],
+       [2, 2, 4, 4]])
+
 ```
+ can split an array into several smaller arrays using ``hsplit``
+
+```
+>>> x = np.arange(1, 25).reshape(2, 12)
+>>> x
+array([[ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12],
+       [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]])
+```
+
+---
+**How to create an array from existing data (cont.)** 
+If you wanted to split this array into three equally shaped arrays, you would run:
+
+```
+np.hsplit(x, 3)
+[array([1, 2, 3, 4, 5, 6, 7, 8]), 
+array([ 9, 10, 11, 12, 13, 14, 15, 16]), 
+array([17, 18, 19, 20, 21, 22, 23, 24])]
+```
+
+Using the ``np.copy`` method will make a complete copy of the array and its data (a deep copy). To use this on your array, you could run:
+```
+b2 = a.copy()
+```
+
+---
+## Exercise: Sensor Reshaping and Access
+
+### Task
+- Create a **1D NumPy array** with values from `0` to `23`
+- Reshape it into a **2D array (4 × 6)**
+- Interpret: Rows → **sensors** and Columns → **time steps**
+- Extract:
+  - All readings from **sensor 2**
+  - The **last two time steps** from all sensors
+### Hint
+```python
+data[row_index, :]
+data[:, column_slice]
+```
+
+---
+
+##  Exercise 2: Coordinate Matrix Slicing
+Objective: Practice slicing in 2D arrays.
+
+**Given Data**
+```
+import numpy as np
+coords = np.array([
+    [0.5, 1.0, 1.5],
+    [1.5, 2.0, 2.5],
+    [2.5, 3.0, 3.5],
+    [3.5, 4.0, 4.5]
+])
+```
+**Task**
+- Extract only Y-axis values
+- Extract the last two rows
+- Create a sub-matrix with X and Z columns only
+---
+
+## Exercise 3: Combining and Splitting Sensor Data
+Given Data
+```
+a1 = np.array([[10, 20],
+               [30, 40]])
+
+a2 = np.array([[50, 60],
+               [70, 80]])
+
+```
+**Task**
+
+- Stack ``a1`` and ``a2`` vertically
+- Stack them horizontally
+- Split the horizontal result into two equal arrays
+- Create a deep copy, modify it, and verify original array is not affected
+
+---
+
+## Basic array operations
 
 ---
 
@@ -1283,7 +1432,7 @@ plt.show()
 6. **Document functions** – Write docstrings
 7. **Keep functions small** – Easier to test and understand
 8. **DRY principle** – Don't Repeat Yourself (reuse code)
-9. **Use standard library** – `time`, `math`, `datetime` are your friends
+9. **Use standard library** – `time`, `math`, `datetime`, `numpy` are your friends
 10. **Test your code** – Even simple scripts benefit from basic testing
 
 ---

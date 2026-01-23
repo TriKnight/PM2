@@ -5,6 +5,16 @@ paginate: true
 math: mathjax
 backgroundColor: #fff
 ---
+<style>
+section::before {
+  content: url('https://vgu.edu.vn/cms-vgu-theme-4/images/cms/vgu_logo.png'); /* Your logo URL */
+  width: 20px; /* Adjust size */
+  height: auto;
+  position: absolute;
+  right: 50px;
+  top: 20px;
+}
+</style>
 
 # Chapter 3: System Decomposition and Class Responsibility
 
