@@ -195,38 +195,7 @@ print(len(name))     # 6
 print('y' in name)   # True
 ```
 
----
 
-## Example Pseudocode of logging simple sensor
-We have:
-- A temperature sensor (°C)
-
-Example 
-1. Reads sensor values
-2. Converts units function °C -> °F ```celsius_to_fahrenheit```
-with `F = (C × 9/5) + 32`
-
----
-# Pseudocode of logging simple sensor
-```
-BEGIN PROGRAM
-
-    FUNCTION celsius_to_fahrenheit(temp_c)
-        RETURN (temp_c × 9 / 5) + 32
-    END FUNCTION
-
-
-    READ temperature sensor → temperature_c
-
-    temperature_f ← celsius_to_fahrenheit(temperature_c)
-
-    PRINT "Temperature:"
-    PRINT temperature_c + " °C"
-    PRINT temperature_f + " °F"
-
-END PROGRAM
-
-```
 
 ---
 
