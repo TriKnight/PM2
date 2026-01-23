@@ -1597,7 +1597,60 @@ np.savetxt('data.csv', a, delimiter=',')
 ```
 
 
+---
 
+## Exercise numpy
+
+---
+
+## Exercise 4: Random Numbers and Statistics
+
+### Task
+- Generate a 5x5 matrix of random floats (0.0 to 1.0)
+- Calculate the **mean** and **standard deviation** of the entire matrix
+- Find the **maximum value** in each row (result should be size 5)
+
+### Hint
+```python
+rng = np.random.default_rng()
+matrix = rng.random((5, 5))
+print(f"Mean: {matrix.mean():.2f}, Std detection: {matrix.std():.2f}")
+print("Row maxs:", matrix.max(axis=1))
+```
+
+---
+
+## Exercise 5: Filtering and Unique Counts
+
+### Task
+- Create an array of 20 random integers between 1 and 5
+- **Filter** the array to keep only values greater than 3
+- Count how many times each unique value appears in the *original* array
+
+### Hint
+```python
+data = rng.integers(1, 6, size=20)
+print("Filtered:", data[data > 3])
+values, counts = np.unique(data, return_counts=True)
+```
+
+---
+
+## Exercise 6: CSV Data Processing
+
+### Task
+- Create a 2D array (10 rows, 3 columns) of random data: `[Time, Temperature, Voltage]`
+- Save it to `sensor_data.csv` using `np.savetxt`
+- Read it back using `pd.read_csv` and display the first 5 rows
+- **Challenge**: Calculate the average Temperature (column 1)
+
+### Hint
+```python
+data = rng.random((10, 3))
+np.savetxt('sensor_data.csv', data, delimiter=',', header='Time,Temp,Volt', comments='')
+df = pd.read_csv('sensor_data.csv')
+print(df['Temp'].mean())
+```
 
 ---
 
