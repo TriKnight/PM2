@@ -1350,6 +1350,255 @@ a2 = np.array([[50, 60],
 
 ## Basic array operations
 
+- Arithmetic operators on arrays apply **element-wise**
+- A new array is created and filled with the result
+
+```python
+data = np.array([1, 2])
+ones = np.ones(2, dtype=int)
+
+print(data + ones)   # [2 3]
+print(data - ones)   # [0 1]
+print(data * data)   # [1 4]
+print(data / data)   # [1. 1.]
+```
+
+---
+
+## Broadcasting
+
+- Describes how NumPy treats arrays with different shapes during arithmetic operations
+- Smaller array is "broadcast" across the larger array so that they have compatible shapes
+
+<p align="center">
+  <img src="images/np_multiply_broadcasting.png" width="75%">
+</p>
+
+```python
+# Multiply array by a scalar
+data = np.array([1.0, 2.0])
+print(data * 1.6) 
+# Output: [1.6 3.2]
+```
+
+---
+
+## Aggregation Functions
+
+- NumPy provides fast built-in aggregation functions
+- `min`, `max`, `sum`, `mean`, `prod`, `std`, etc.
+
+```python
+a = np.array([1, 2, 3])
+
+print(a.max())   # 3
+print(a.min())   # 1
+print(a.sum())   # 6
+print(a.mean())  # 2.0
+```
+
+---
+
+## Aggregation with Axes
+
+- You can specify the `axis` to aggregate along
+    - `axis=0`: along the rows (vertical)
+    - `axis=1`: along the columns (horizontal)
+
+<p align="center">
+  <img src="images/np_matrix_aggregation.png" width="75%">
+</p>
+
+```python
+m = np.array([[1, 2], 
+              [3, 4]])
+print(m.sum(axis=0))  # [4 6]  (1+3, 2+4)
+print(m.sum(axis=1))  # [3 7]  (1+2, 3+4)
+```
+
+---
+
+## More Useful Array Operations
+
+- Other common aggregation functions:
+    - `prod()`: Product of elements
+    - `std()`: Standard deviation
+    - `mean()`: Mean (average)
+
+```python
+a = np.array([1, 2, 3])
+print(a.prod())  # 6
+print(a.std())   # 0.816...
+```
+
+---
+
+## Creating Matrices
+
+- **Matrices** are 2D arrays (lists of lists)
+- Indexing uses comma-separated values: `[row, col]`
+
+![Creating Matrix](images/np_create_matrix.png)
+![Matrix Indexing](images/np_matrix_indexing.png)
+
+```python
+data = np.array([[1, 2], 
+                 [3, 4], 
+                 [5, 6]])
+
+print(data[0, 1])        # 2
+print(data[1:3])         # [[3 4] [5 6]] (slicing rows)
+print(data[0:2, 0])      # [1 3] (slicing rows 0-1, col 0)
+```
+
+---
+
+## Initializing Arrays
+
+- NumPy offers functions to create arrays with initial placeholders
+- `np.zeros()`: Array of zeros
+- `np.ones()`: Array of ones
+
+![Ones and Zeros](images/np_ones_zeros_matrix.png)
+
+---
+
+```python
+# 1D arrays
+print(np.zeros(3))       # [0. 0. 0.]
+print(np.ones(3))        # [1. 1. 1.]
+
+# 2D arrays (matrices)
+print(np.zeros((2, 3)))  # 2 rows, 3 columns of zeros
+print(np.ones((2, 2)))   # 2x2 matrix of ones
+```
+
+---
+
+## 3D Arrays
+
+- Arrays can have 3 or more dimensions (tensors)
+- Created by nesting lists of lists of lists
+
+```python
+# 3D array: 2 blocks, 3 rows, 2 columns
+d3 = np.array([[[1, 2], [3, 4], [5, 6]], 
+               [[7, 8], [9, 10], [11, 12]]])
+
+print(d3.shape)  # (2, 3, 2)
+print(d3.ndim)   # 3
+```
+
+---
+
+## Generating Random Numbers
+
+- Use `np.random.default_rng()` to create a Generator
+- Generate floats (0.0 to 1.0) or integers
+
+```python
+rng = np.random.default_rng()
+
+# 3 random floats
+print(rng.random(3)) 
+
+# 2x4 array of integers between 0 and 4
+print(rng.integers(5, size=(2, 4)))
+```
+
+---
+
+## Unique Items and Counts
+
+- Use `np.unique()` to find unique elements
+- `return_counts=True` returns frequency of each element
+
+```python
+a = np.array([11, 11, 12, 13, 11, 12])
+unique_values, counts = np.unique(a, return_counts=True)
+
+print(unique_values)  # [11 12 13]
+print(counts)         # [ 3  2  1]
+```
+
+---
+
+## Transposing and reshaping a matrix
+
+- **Reshape**: Change dimensions without changing data
+- **Transpose**: Flip axes (rows become columns)
+
+<p align="center">
+  <img src="images/np_transposing_reshaping.png" width="65%">
+</p>
+
+<p align="center">
+  <img src="images/np_reshape.png" width="55%">
+</p>
+
+---
+
+```python
+data = np.array([1, 2, 3, 4, 5, 6])
+reshaped = data.reshape(2, 3)
+# [[1 2 3]
+#  [4 5 6]]
+
+transposed = reshaped.transpose() # or reshaped.T
+# [[1 4]
+#  [2 5]
+#  [3 6]]
+```
+
+---
+
+## Flattening Arrays
+
+- Convert multi-dimensional array to 1D
+- `flatten()`: returns a copy (safe)
+- `ravel()`: returns a view (memory efficient, modifies original if changed)
+
+```python
+x = np.array([[1, 2], [3, 4]])
+flat = x.flatten()
+print(flat) # [1 2 3 4]
+```
+
+---
+
+## Importing and Exporting CSV
+
+- **Pandas** is great for handling CSVs
+- `pd.read_csv()`: loads data into a DataFrame
+- `to_csv()`: saves DataFrame to file
+
+![Read CSV](images/np_readcsv.png)
+![Pandas DataFrame](images/np_pandas.png)
+
+---
+
+```python
+import pandas as pd
+
+# Reading
+df = pd.read_csv('music.csv')
+print(df) 
+# Columns: Artist, Genre, Listeners, Plays
+
+# Exporting
+df.to_csv('new_music.csv')
+```
+
+- You can also use `np.savetxt()` for simple arrays
+
+```python
+a = np.array([1, 2, 3])
+np.savetxt('data.csv', a, delimiter=',')
+```
+
+
+
+
 ---
 
 ## Visualization with matplotlib
@@ -1419,6 +1668,13 @@ plt.tight_layout()
 plt.savefig("trajectory_3d.png")
 plt.show()
 ```
+
+---
+- **3D Plotting**:
+    - `fig.add_subplot(projection='3d')`
+    - `plot_surface()`
+
+![3D Plot](images/matplotlib3.png)
 
 ---
 
