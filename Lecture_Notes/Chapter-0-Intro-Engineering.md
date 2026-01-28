@@ -132,8 +132,6 @@ By the end of this chapter, you will:
 
 ---
 
----
-
 ## Academic Integrity Policy
 
 - All submitted code must be explainable by the student
