@@ -165,8 +165,45 @@ while True:
     read_temperature()
     check_temperature()
 ```
+---
+## Object-Oriented Example
+
+```python
+class TempSensor:
+    def __init__(self, name="Main Sensor"):
+        self.name = name
+        self.temperature = 0
+        self.has_error = False
+    def read(self):
+        try:
+            self.temperature = get_raw_value()
+            self.has_error = False
+        except Exception:
+            self.has_error = True
+            self.temperature = -999
+    def check_threshold(self, limit=100):
+        if not self.has_error and self.temperature > limit:
+            print(f"ALARM: {self.name} reached {self.temperature}°C")
+            trigger_alarm()
+sensor_a = TempSensor("Boiler 01")
+sensor_a.read()
+sensor_a.check_threshold()
+```
 
 ---
+## Procedural vs OOP: Summary
+
+| Aspect | Procedural | Object-Oriented |
+|--------|-----------|-----------------|
+| **Organization** | Functions | Classes/Objects |
+| **Data** | Global variables | Instance variables |
+| **Reusability** | Limited | High (inheritance) |
+| **Maintainability** | Low (complex) | High (modular) |
+| **Scalability** | Difficult | Better |
+| **Testing** | Harder (dependencies) | Easier (isolation) |
+
+---
+
 ## Why Python in Programming Method 2 (After C++ in PM1)?
 
 ---
@@ -218,6 +255,10 @@ Python is chosen to:
 - **Python** teaches you *how systems are designed*  
 
 A professional mechatronics engineer must master **both**.
+
+
+
+
 
 ---
 
@@ -493,6 +534,29 @@ if sensor.is_valid():
 
 ---
 
+# Exercise 1: Encapsulation (The "Safe" Gripper)
+**Task:** Create a simple class Gripper by writing. Do **NOT** need implement in the detail functions (just the name of functions and variables) (~10 line of code)
+
+- Data: A private attribute __pressure (default 0) and __max_pressure (default 100).
+
+- Method ``apply_pressure(amount)``: Should only update ``__pressure`` if the amount is between ``0`` and ``__max_pressure``. If it's higher, print an error ``"Safety Limit Exceeded!"``.
+
+- Method ``get_status()``: Return the current pressure.
+
+---
+
+# Exercise 2: Inheritance (Actuator Types)
+
+Goal: Use a base class to share properties between different hardware components. Do **NOT** need implement in the detail functions (just the name of functions and variables) (~10 line of code) 
+Task: 
+-  Create a base class ``Actuator`` with an ``__init__`` that takes a ``pin_number``. 
+-  Create a subclass LED that adds a method ``turn_on()`` (prints "LED on pin X is glowing"). 
+- Create a subclass ``Buzzer`` that adds a method ``beep()`` (prints "Buzzer on pin X is making sound").
+
+---
+
+
+
 ## Apply Pseudocode Before Coding in Python
 ### What is Pseudocode
 Pseudocode is a **human-readable way** to describe the steps of an algorithm using programming-like structures (assignments, conditions, loops) **without strict syntax**.
@@ -612,6 +676,7 @@ END FUNCTION
 
         
 ---
+
 # Full Pseudocode of logging simple sensor
 ```
 BEGIN PROGRAM
@@ -630,19 +695,20 @@ BEGIN PROGRAM
     PRINT temperature_f + " °F"
 
 END PROGRAM
-
 ```
 
-## Procedural vs OOP: Summary
+---
 
-| Aspect | Procedural | Object-Oriented |
-|--------|-----------|-----------------|
-| **Organization** | Functions | Classes/Objects |
-| **Data** | Global variables | Instance variables |
-| **Reusability** | Limited | High (inheritance) |
-| **Maintainability** | Low (complex) | High (modular) |
-| **Scalability** | Difficult | Better |
-| **Testing** | Harder (dependencies) | Easier (isolation) |
+# Exercise 4: The Smart Cooling Fan
+
+Scenario: An engineer needs to design a cooling system. If the temperature exceeds 40°C, the fan must turn on. If it's below 40°C, the fan stays off.
+Task A: Write the Pseudocode
+Task B: Convert to OOP Python
+# Exercise 5: Automated Drill Cycle
+
+Scenario: A robotic drill must lower into a part, spin for 3 seconds, and then retract. This happens 5 times for a 5-hole pattern.
+Task A: Write the Pseudocode
+Task B: Convert to OOP Python
 
 ---
 
