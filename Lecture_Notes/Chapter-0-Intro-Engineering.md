@@ -108,9 +108,29 @@ By the end of this chapter, you will:
 
 ## Assessment Breakdown
 
-- **Coding challenge: 10%**
-- **Final project (code, tests, report) (solo or upto 3 students): 20%**
+- **Final project (code, tests, report) (solo or upto 3 students/group): 30%**
 - **Final WRITING exam: 70%**
+
+---
+
+## Grading Rubric
+| Criteria | Weight | Focus |
+| :--- | :--- | :--- |
+| **OOP Mastery** | 30% | Proper encapsulation, inheritance, and hardware decoupling (HAL). |
+| **Reliability  && Testing** | 30% | Deterministic behavior (FSM) and graceful error handling. Quality and coverage of `pytest` scripts; edge-case validation. |
+| **Innovation & Use Case** | **20%** | Originality of the application and creative use cases |
+| **Documentation** | 10% | Clarity of the technical report and professional Git discipline. |
+| **Presentation** | 10% | Quality of the live demo, video, and oral defense. |
+
+---
+
+## Tips for Success
+
+1.  **Keep it Simple:** A robust 2-joint arm is better than a buggy 6-joint arm.
+2.  **Borrow, but Credit:** Use MuJoCo examples for physics, but the **control architecture** must be your own.
+3.  **Test Early:** Ensure your logic classes work in isolation before plugging them into the physics engine.
+
+---
 
 ---
 
