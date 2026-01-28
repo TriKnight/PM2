@@ -1,5 +1,5 @@
 ---
-marp: true
+marp: false
 theme: default
 paginate: true
 math: mathjax
@@ -7,18 +7,20 @@ backgroundColor: #fff
 ---
 <style>
 section::before {
-  content: url('https://vgu.edu.vn/cms-vgu-theme-4/images/cms/vgu_logo.png'); /* Your logo URL */
-  width: 20px; /* Adjust size */
-  height: auto;
+  content: url('https://static.wixstatic.com/media/208805_559a1dbc1edf414c909b1bfbe6a16667~mv2.png/v1/fill/w_125,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU%20Logo.png'); /* Your logo URL */
+  width: 5px; /* Adjust size */
+  height: 5px;
   position: absolute;
-  right: 50px;
-  top: 20px;
+  right: 20px;
+  top: 10px;
 }
 </style>
+
 
 # Chapter 0: Introduction to Engineering Software for Mechatronic Systems
 
 ## Author: Tri Bien Minh | tri.bm@vgu.edu.vn | 
+###   [triknight.github.io](https://triknight.github.io/) 
 
 
 ---

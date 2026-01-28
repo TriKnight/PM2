@@ -7,12 +7,12 @@ backgroundColor: #fff
 ---
 <style>
 section::before {
-  content: url('https://vgu.edu.vn/cms-vgu-theme-4/images/cms/vgu_logo.png'); /* Your logo URL */
-  width: 20px; /* Adjust size */
-  height: auto;
+  content: url('https://static.wixstatic.com/media/208805_559a1dbc1edf414c909b1bfbe6a16667~mv2.png/v1/fill/w_125,h_71,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/VGU%20Logo.png'); /* Your logo URL */
+  width: 5px; /* Adjust size */
+  height: 5px;
   position: absolute;
-  right: 50px;
-  top: 20px;
+  right: 20px;
+  top: 10px;
 }
 </style>
 
@@ -209,9 +209,9 @@ print('y' in name)   # True
 
 ---
 
-## Exercise 1.1 Logging simple sensor
+# Exercise 1. Logging simple sensor
 
-Please write Pseudocode of this logging simple sensor
+Please write Pseudocode then convert to Python of this logging simple sensor
 We have:
 - A temperature sensor (°C)
 - A voltage sensor (V)
@@ -321,6 +321,29 @@ readings = [0.1, 0.5, 2.3, 0.2, 1.1]
 valid = [r for r in readings if r < 2.0]
 print(valid)  # [0.1, 0.5, 0.2, 1.1]
 ```
+
+---
+# Exercise 2: Sensor Data Cleaning
+**Context:** You receive a raw string from a serial port connected to a temperature sensor. The string is "noisy" and contains extra whitespace and a prefix.
+
+**Task:**
+1. Clean the string `"  TEMP_DATA:25.678  "`.
+2. Remove the whitespace and the prefix `"TEMP_DATA:"`.
+3. Convert the remaining value to a `float`.
+4. Use an **f-string** to print the result rounded to **2 decimal places** with the unit "°C".
+
+---
+
+# Exercise 3: Actuator Command Filtering
+**Context:** A robot controller generates a list of motor torque commands (in Nm). However, the motor driver has a physical safety limit of **5.0 Nm**.
+
+**Task:**
+1. Given the list: `torques = [1.2, 5.5, 0.8, 10.2, 4.9, -2.1, 7.0]`
+2. Use a **List Comprehension** to create a new list `safe_torques`.
+3. This list should only contain values where the *absolute value* is less than or equal to `5.0`.
+4. Append a "Home" command value of `0.0` to the end of your `safe_torques` list.
+
+
 
 ---
 
@@ -439,6 +462,25 @@ print(a - b)  # Difference: {1}
 readings = [1.0, 1.0, 0.5, 0.5, 2.0]
 unique = list(set(readings))  # [1.0, 0.5, 2.0]
 ```
+---
+# Exercise 4: Robot State Handling (Tuples & Unpacking)
+
+**Context:** A GPS module returns a tuple containing `(latitude, longitude, altitude)`. You need to process this coordinate.
+
+**Task:**
+1. Create a tuple called `raw_gps` with values `(10.823, 106.629, 5.0)`.
+2. **Unpack** the first two values into variables `lat` and `lon`, and ignore the altitude using the "underscore" (`_`) convention or by slicing.
+3. Write a function `get_velocity()` that returns a **tuple** of two values: `(vx, vy)`.
+4. Call the function and unpack the result into `vel_x` and `vel_y`. Print them using an f-string.
+---
+
+# Exercise 5: Sensor Management (Dictionaries)
+
+**Context:** You are managing a fleet of sensors. You need to store their configurations and ensure you have a list of unique sensor types currently active. **Task:**
+1. Create a **dictionary** `sensor_cfg` with keys: `"id"`, `"type"`, and `"range"`. Assign them values `101`, `"Lidar"`, and `[0.1, 30.0]`.
+2. Update the `"range"` in the dictionary to `[0.1, 50.0]` and add a new key `"status"` with the value `"active"`.
+3. Given a list of active types: `active_types = ["Lidar", "Camera", "Lidar", "IMU", "Camera"]`.
+4. Use a **Set** to find the unique types in `active_types` and print the count of unique sensors found.
 
 ---
 
@@ -546,6 +588,33 @@ for i in range(5):
         continue  # Skip this iteration
     print(i)      # 0, 1, 3, 4
 ```
+
+---
+
+# Exercise 6: Safety Interlock System (if/elif/else)
+
+**Context:** You are writing a supervisor module for a robotic arm. The system must decide its `safety_mode` based on a laser scanner distance (`dist`) in meters and a user `emergency_stop` boolean.
+
+**Task:**
+1. Define `dist = 0.8` and `emergency_stop = False`.
+2. Write a logic block to set a variable `safety_mode` based on these rules:
+    - If `emergency_stop` is `True`, mode is **"ESTOP"**.
+    - Else if `dist` is less than `0.5`, mode is **"COLLISION"**.
+    - Else if `dist` is between `0.5` and `1.5` (inclusive), mode is **"WARNING"**.
+    - Otherwise, mode is **"NORMAL"**.
+
+
+---
+
+# Exercise 7: Battery Polling & Logging (loops)
+
+**Context:** You need to monitor a drone's battery level during a startup sequence.
+
+**Task:**
+1. Given a list of simulated voltage readings: `voltages = [12.6, 12.5, 12.2, 11.8, 11.5, 10.8, 10.2]`.
+2. Use a **for loop** with `enumerate` to print each reading and its "Minute" index.
+3. Use a **while loop** to simulate "draining" a single battery value. Start at `v = 12.0`. In each loop, subtract `0.5`. Stop the loop and print "Low Battery!" if `v` drops below `10.5`.
+4. **Challenge:** Loop through the `voltages` list. Use `continue` to skip any reading above `12.0` and `break` the loop immediately if a reading falls below `11.0`. Print the readings that don't trigger those conditions.
 
 ---
 
@@ -661,6 +730,25 @@ except TypeError:
 
 ---
 
+
+# Exercise 8: Motor Control Supervisor
+
+**Context:** You are writing a function to command a motor. For safety, the motor has a strict physical limit of **1000 RPM**. Any command exceeding this must be rejected to prevent hardware damage.
+
+**Task:**
+1. Define a function `send_motor_command(rpm: float, motor_id: int = 0)`.
+2. Inside the function, if `rpm` is greater than `1000`, **raise** a `ValueError` with the message `"Safety Limit Exceeded"`.
+
+---
+# Exercise 8: Motor Control Supervisor (cont.)
+
+3. The function should return a **tuple** containing `(motor_id, rpm)` to confirm the command was sent.
+4. **Call the function** inside a `try/except` block. 
+   - Test it once with `rpm = 500`.
+   - Test it once with `rpm = 1200` and catch the `ValueError` to print a safety alert.
+
+---
+
 ## Basic Classes: Data Objects
 
 - Objects group related data and behavior
@@ -762,6 +850,7 @@ print(motor.command)  # 3.14
 # motor._command = 10.0  # Don't do this! (breaks encapsulation)
 ```
 
+
 ---
 
 ## Using Built-in Data Structures Together
@@ -796,6 +885,27 @@ data = {
 ```
 
 ---
+
+# Exercise 9: Simulated Sensor Data Logger
+
+**Context:** You are building a system to monitor a **Pressure Sensor**. You need a class to represent the physical sensor and a data structure to store history.
+
+**Task:**
+1. Create a class `PressureSensor` with a private attribute `_pressure`.
+2. Implement a method `update_reading(value: float)` that checks if the value is between **0.0 and 10.0 bar**. If not, raise a `ValueError`.
+3. Use a `@property` to allow read-only access to the current pressure.
+
+---
+
+# Exercise 9: Simulated Sensor Data Logger (cont.)
+
+4. Create a list called `sensor_log`.
+5. Write a loop that simulates 3 readings: `[2.5, 4.8, 11.0]`. 
+6. For each reading, use a `try/except` block to update the sensor. If successful, append a **dictionary** to `sensor_log` with the keys `"id"`, `"val"`, and `"status"`.
+
+---
+
+
 
 ## enumerate() and zip()
 
@@ -972,6 +1082,23 @@ logger.save()
 ```
 
 ---
+
+# Exercise 10: Robotic Reachability & Profiling
+
+**Context:** You are calculating the position of a 1-DOF robot arm's end-effector. You also need to measure how long the calculation takes to ensure your control loop can run at a high frequency.
+
+**Task:**
+1. Import `math` and `datetime`.
+2. Define `arm_length = 1.5` (meters) and `target_angle_deg = 30.0`.
+3. Record the **start time** using `datetime.now()`.
+4. Convert the angle to **radians**.
+5. Calculate the end-effector height ($y = L \cdot \sin(\theta)$) and reach ($x = L \cdot \cos(\theta)$).
+6. Record the **end time** and calculate the total duration in microseconds.
+7. Print the results ($x, y$) and the execution time.
+
+---
+
+---
 ## Standard Library: numpy
 https://numpy.org/doc/stable/user/absolute_beginners.html
 NumPy (Numerical Python) is an open source Python library that’s widely used in science and engineering. The NumPy library contains multidimensional array data structures, such as the homogeneous, N-dimensional ndarray, and a large library of functions that operate efficiently on these data structures.
@@ -1106,7 +1233,7 @@ Efficiently managing data order and combining datasets are core tasks in enginee
 
 ---
 
-## Example
+## Simple np.sort()
 
 ```python
 import numpy as np
@@ -1129,6 +1256,12 @@ col_sorted = np.sort(matrix, axis=0)
 print("Column Sorted:\n", col_sorted)
 # Output: [[3, 1, 2], [6, 4, 5]]
 
+```
+
+---
+## Simple np.concatenating()
+
+```python
 # Concatenating arrays
 a = np.array([1, 2, 3])
 b = np.array([4, 5, 6])
@@ -1137,6 +1270,7 @@ combined = np.concatenate((a, b))
 ```
 
 ---
+
 
 ## Key Rules for Reshaping
 
@@ -1171,6 +1305,31 @@ volumetric_data = raw_readings.reshape(2, 3, 2)
 print("\nReshaped 3D Tensor:\n", volumetric_data)
 
 ```
+
+---
+
+# Exercise 11: Multi-Axis IMU Data Processing
+
+**Context:** You are collecting raw data from a 3-axis IMU (Inertial Measurement Unit) that measures acceleration in $X$, $Y$, and $Z$. The sensor sends data as a continuous 1D stream.
+
+**Task:**
+1. Create a 1D NumPy array called `raw_imu` with 12 elements (representing 4 time steps, each with $X, Y, Z$ readings). Use `np.array([0.1, 0.2, 9.8, 0.15, 0.22, 9.78, 0.12, 0.21, 9.81, 0.11, 0.23, 9.79])`.
+2. Inspect and print the **shape** and **dtype** of this array.
+3. **Reshape** the data into a 2D matrix called `imu_matrix` where each **row** represents one time step and the **columns** are $X, Y, Z$.
+4. Calculate the total **size** of the matrix to verify no data was lost.
+
+---
+
+# Exercise 12: Sensor Fusion & Sorting
+
+**Context:** You have two separate 1D arrays representing distance readings from two Ultrasonic sensors. You need to combine them and sort them to find the "minimum safe distance" detected across the entire system.
+
+**Task:**
+1. Define `sensor_left = np.array([1.5, 0.8, 2.3])` and `sensor_right = np.array([2.1, 0.5, 1.9])`.
+2. **Concatenate** these into a single array named `all_readings`.
+3. Use `np.sort()` to order the readings from smallest to largest.
+4. **Reshape** `all_readings` into a 2D array with 3 rows and 2 columns. Inspect the output: does the sorting order stay consistent across rows?
+
 
 ---
 ## Indexing and slicing
@@ -1293,58 +1452,21 @@ b2 = a.copy()
 ```
 
 ---
-## Exercise: Sensor Reshaping and Access
+# Exercise 13: Robot Sensor Data Extraction
 
-### Task
-- Create a **1D NumPy array** with values from `0` to `23`
-- Reshape it into a **2D array (4 × 6)**
-- Interpret: Rows → **sensors** and Columns → **time steps**
-- Extract:
-  - All readings from **sensor 2**
-  - The **last two time steps** from all sensors
-### Hint
-```python
-data[row_index, :]
-data[:, column_slice]
-```
+**Context:** You have a multi-sensor array providing data. You need to combine data from two different observation periods and extract specific "Region of Interest" (ROI) coordinates for a control loop.
+
+**Task:**
+1. Create two 2D arrays, `period_1` and `period_2`. Both should be **(2x3)** matrices. 
+   - `period_1`: `[[10, 11, 12], [20, 21, 22]]`
+   - `period_2`: `[[30, 31, 32], [40, 41, 42]]`
 
 ---
-
-##  Exercise 2: Coordinate Matrix Slicing
-Objective: Practice slicing in 2D arrays.
-
-**Given Data**
-```
-import numpy as np
-coords = np.array([
-    [0.5, 1.0, 1.5],
-    [1.5, 2.0, 2.5],
-    [2.5, 3.0, 3.5],
-    [3.5, 4.0, 4.5]
-])
-```
-**Task**
-- Extract only Y-axis values
-- Extract the last two rows
-- Create a sub-matrix with X and Z columns only
----
-
-## Exercise 3: Combining and Splitting Sensor Data
-Given Data
-```
-a1 = np.array([[10, 20],
-               [30, 40]])
-
-a2 = np.array([[50, 60],
-               [70, 80]])
-
-```
-**Task**
-
-- Stack ``a1`` and ``a2`` vertically
-- Stack them horizontally
-- Split the horizontal result into two equal arrays
-- Create a deep copy, modify it, and verify original array is not affected
+# Exercise 13: Robot Sensor Data Extraction (cont.)
+2. **Vertically Stack** them into a single array called `full_data` (Shape: 4x3).
+3. Using **Slicing**, extract the **middle column** (index 1) across all rows.
+4. Using **Indexing**, extract a sub-matrix containing the **last two rows** and the **last two columns**.
+5. Use `.copy()` to create a backup of `full_data` called `data_backup`.
 
 ---
 
@@ -1565,6 +1687,30 @@ print(flat) # [1 2 3 4]
 ```
 
 ---
+# Exercise 14: Sensor Bias Correction (Broadcasting)
+
+**Context:** You are reading data from a 3-axis accelerometer. However, the sensor has a constant "zero-offset" error (bias) on each axis that needs to be subtracted to get accurate physical readings.
+
+1. Create a 2D array `raw_accel` (4 time steps × 3 axes) using:
+   `[[0.1, 0.1, 9.9], [0.1, 0.1, 9.9], [0.2, 0.0, 9.8], [0.1, 0.2, 9.9]]`.
+2. Define a 1D "bias" vector: `bias = np.array([0.1, 0.1, 9.8])`.
+3. Use **broadcasting** to subtract the `bias` from `raw_accel` to create `clean_accel`.
+4. Multiply `clean_accel` by a scalar `9.81` to convert the readings from "g" to $m/s^2$.
+
+---
+
+# Exercise 15: System Performance Analysis (Aggregation)
+
+**Context:** You have a matrix representing the power consumption (in Watts) of 4 different motors over 5 minutes of a test cycle.
+
+1. Generate a 4x5 matrix of random floats between 0.0 and 10.0 using `np.random.default_rng()`.
+2. Find the **Total Power** consumed by the whole system (sum of all elements).
+3. Find the **Average Power** consumed by *each motor* over the 5 minutes (hint: `axis=1`).
+4. Find the **Peak Power** recorded for *each time step* (hint: `axis=0`).
+5. **Transpose** the matrix so that rows represent "Time" and columns represent "Motors". Print the new shape.
+
+---
+
 
 ## Importing and Exporting CSV
 
@@ -1599,11 +1745,7 @@ np.savetxt('data.csv', a, delimiter=',')
 
 ---
 
-## Exercise numpy
-
----
-
-## Exercise 4: Random Numbers and Statistics
+# Exercise 16: Random Numbers and Statistics
 
 ### Task
 - Generate a 5x5 matrix of random floats (0.0 to 1.0)
@@ -1620,7 +1762,7 @@ print("Row maxs:", matrix.max(axis=1))
 
 ---
 
-## Exercise 5: Filtering and Unique Counts
+# Exercise 17: Filtering and Unique Counts
 
 ### Task
 - Create an array of 20 random integers between 1 and 5
@@ -1636,7 +1778,7 @@ values, counts = np.unique(data, return_counts=True)
 
 ---
 
-## Exercise 6: CSV Data Processing
+# Exercise 18: CSV Data Processing
 
 ### Task
 - Create a 2D array (10 rows, 3 columns) of random data: `[Time, Temperature, Voltage]`
@@ -1779,13 +1921,6 @@ plt.show()
 - Standard library is rich – learn to use it
 - Practice by building real projects
 
----
-
-## Key Takeaway
-
-> "Readability counts. Explicit is better than implicit. Simple is better than complex." – The Zen of Python (PEP 20)
-
-Type `import this` in Python to see the full philosophy!
 
 ---
 
