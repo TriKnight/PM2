@@ -19,7 +19,7 @@ section::before {
 </style>
 
 # Chapter 2: Modeling Technical Variables
-
+## Author: Tri Bien Minh | tri.bm@vgu.edu.vn | 
 ---
 
 ## Learning Objectives
