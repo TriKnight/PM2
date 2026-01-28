@@ -1,5 +1,5 @@
 ---
-marp: false
+marp: true
 theme: default
 paginate: true
 math: mathjax
@@ -21,6 +21,7 @@ section::before {
 
 ## Author: Tri Bien Minh | tri.bm@vgu.edu.vn | 
 ###   [triknight.github.io](https://triknight.github.io/) 
+
 
 
 ---
@@ -90,6 +91,7 @@ By the end of the course, students will be able to:
 
 ---
 
+
 ## Chapter Learning Objectives
 
 By the end of this chapter, you will:
@@ -106,8 +108,9 @@ By the end of this chapter, you will:
 
 ## Assessment Breakdown
 
-- **Final project (code, tests, report): 20%**
-- **Final WRITING exam: 80%**
+- **Coding challenge: 10%**
+- **Final project (code, tests, report) (solo or upto 3 students): 20%**
+- **Final WRITING exam: 70%**
 
 ---
 
@@ -119,6 +122,121 @@ By the end of this chapter, you will:
 - **AI tools may be used for conceptual explanation only.**
 - **AI-generated code, logic, or architectural designs are not permitted unless explicitly stated.**
 - **Students must be able to explain, derive, and modify all submitted code.**
+
+
+---
+
+# Why Python for Mechatronics & Robotics?
+## Bridging the gap between Algorithms and Hardware
+
+
+## 1. The "Glue" Language of Robotics
+
+In a mechatronic system, you handle diverse components:
+* **Perception:** Computer Vision (OpenCV, PyTorch)
+* **Planning:** Motion algorithms and Kinematics
+* **Control:** Communication with microcontrollers (Serial, CAN bus)
+
+**Python acts as the "Glue"**, allowing these disparate subsystems to communicate through simple, readable code rather than complex low-level memory management.
+
+
+
+---
+
+## 2. Industry Standard Ecosystem
+
+Python is the primary language for the tools used in professional robotics research and development:
+
+* **ROS 2 (Robot Operating System):** Python is a first-class citizen for writing nodes.
+* **MuJoCo / PyBullet:** Industry-leading physics engines for simulation.
+* **NumPy / SciPy:** Essential for high-speed linear algebra and matrix transformations (Kinematics).
+* **OpenCV:** The standard for robot vision and object detection.
+
+
+
+---
+
+## 3. Rapid Prototyping vs. C++
+
+| Feature | Python | C++ |
+| :--- | :--- | :--- |
+| **Development Speed** | Very Fast (Interpretive) | Slower (Compile-link cycle) |
+| **Memory Management** | Automatic (Garbage Collected) | Manual (Pointers/References) |
+| **Readability** | High (Pseudocode-like) | Medium (Complex Syntax) |
+| **Performance** | Good (with NumPy/C-extensions) | Excellent (Real-time critical) |
+
+**Modern Engineering Strategy:** Prototype in Python to verify logic, then port critical loops to C++ only if necessary.
+
+---
+
+## 4. Deterministic Modeling with OOP
+
+Python’s clean **Object-Oriented Programming (OOP)** syntax allows us to model physical hardware as software objects:
+
+* **Abstraction:** Create a `Motor` class that works for *any* motor brand.
+* **Encapsulation:** Protect hardware states (e.g., current position) from illegal overrides.
+* **Inheritance:** Define a base `Sensor` class and extend it to `Lidar`, `IMU`, or `Encoder`.
+
+
+
+---
+
+## 5. Integration with Modern AI
+
+The future of robotics is **Autonomous and Intelligent**.
+* **Machine Learning:** 90% of ML research is done in Python (PyTorch, TensorFlow, Scikit-learn).
+* **Computer Vision:** Real-time object tracking and depth sensing.
+* **LLMs for Robotics:** Using Python to bridge Large Language Models with robot task planning.
+
+
+
+---
+
+## Programming Method 2 — Python
+
+**Focus:**  
+> *How engineers design control software systems*
+
+- Software architecture and structure  
+- Object-Oriented Programming (OOP)  
+- State modeling (FSMs)  
+- Algorithm clarity  
+- System integration  
+- Unit testing
+
+---
+
+## Why Python Is Used in This Course
+
+Python is chosen to:
+
+- Remove **accidental complexity**  
+- Reduce syntactic overhead  
+- Highlight **engineering design concepts**  
+- Focus on **correctness, structure, and reasoning**  
+
+> The goal is **better design**, not faster coding.
+
+---
+# Conclusion: The Engineer's Toolkit
+
+Python is not just a "beginner" language; it is a **professional engineering tool**. 
+
+In this course, we use Python to:
+1. **Simulate** complex physics in MuJoCo.
+2. **Architect** robust control logic using FSMs.
+3. **Verify** our systems using professional testing suites (`pytest`).
+
+**"Python allows you to focus on the Robotics, not the Syntax."**
+
+---
+
+# Key Takeaway
+
+- **C++** teaches you *how programs run*  
+- **Python** teaches you *how systems are designed*  
+
+A professional mechatronics engineer must master **both**.
 
 ---
 
@@ -287,61 +405,6 @@ sensor_a.check_threshold()
 | **Maintainability** | Low (complex) | High (modular) |
 | **Scalability** | Difficult | Better |
 | **Testing** | Harder (dependencies) | Easier (isolation) |
-
----
-
-## Why Python in Programming Method 2 (After C++ in PM1)?
-
----
-
-## Context
-
-Students have already completed **Programming Method 1 (C++)**, including:
-
-- Variables and data types  
-- Control structures  
-- Functions and classes  
-- Compilation and memory concepts  
-
-➡️ This course **does not replace C++**  
-➡️ It **builds on that foundation**
-
----
-
-## Programming Method 2 — Python
-
-**Focus:**  
-> *How engineers design control software systems*
-
-- Software architecture and structure  
-- Object-Oriented Programming (OOP)  
-- State modeling (FSMs)  
-- Algorithm clarity  
-- System integration  
-- Unit testing
-
----
-
-## Why Python Is Used in This Course
-
-Python is chosen to:
-
-- Remove **accidental complexity**  
-- Reduce syntactic overhead  
-- Highlight **engineering design concepts**  
-- Focus on **correctness, structure, and reasoning**  
-
-> The goal is **better design**, not faster coding.
-
----
-
-## Key Takeaway
-
-- **C++** teaches you *how programs run*  
-- **Python** teaches you *how systems are designed*  
-
-A professional mechatronics engineer must master **both**.
-
 
 
 

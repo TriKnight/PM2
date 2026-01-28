@@ -1831,48 +1831,6 @@ plt.show()
 
 ---
 
-## 3D Visualization with matplotlib
-
-- `matplotlib` also supports simple 3D plots
-- Useful for visualizing trajectories or surfaces
-
-```python
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 (needed for 3D)
-import numpy as np
-
-# Example: helical (spiral) trajectory in 3D
-t = np.linspace(0.0, 4.0 * np.pi, 200)  # time parameter
-x = np.cos(t)                           # x-position
-y = np.sin(t)                           # y-position
-z = t / (2 * np.pi)                     # height
-
-fig = plt.figure(figsize=(8, 6))
-ax = fig.add_subplot(111, projection="3d")
-```
----
-
-```
-ax.plot(x, y, z, label="Helical trajectory")
-ax.set_xlabel("X")
-ax.set_ylabel("Y")
-ax.set_zlabel("Z (time)")
-ax.set_title("3D Trajectory Example")
-ax.legend()
-plt.tight_layout()
-plt.savefig("trajectory_3d.png")
-plt.show()
-```
-
----
-- **3D Plotting**:
-    - `fig.add_subplot(projection='3d')`
-    - `plot_surface()`
-
-![3D Plot](images/matplotlib3.png)
-
----
-
 ## Good Practices Summary
 
 1. **Use type hints** – They document code and catch bugs
