@@ -22,8 +22,73 @@ section::before {
 
 
 ---
+## Course Description 
 
-## Learning Objectives
+This course introduces object-oriented programming (OOP) not merely as a syntax, but as a rigorous **Engineering Practice Focus** for controlling complex mechatronic systems. In an industrial environment, software is rarely written from scratch and never exists in isolation; therefore, this course simulates the **professional lifecycle of an engineer.**
+
+### 1. From Scripting to System Architecture
+Students transition from writing "disposable" scripts to developing **production-grade software**. The focus is on creating systems that are **Maintainable** and **Extensible**.
+
+---
+
+### 2. The Software-Hardware Contract
+A central theme is the **Hardware Abstraction Layer (HAL)**. Engineers will learn to design "contracts" (interfaces) that decouple the high-level control logic from the specific electrical hardware. 
+
+### 3. Professional Workflow and Tooling
+To prepare for a career in robotics or embedded systems, students will operate within a **modern DevOps ecosystem**. This includes:
+
+- **Version Control (Git):** Managing features via branches and disciplined commit history.
+- **Automated Verification:** Shifting from "manual testing" to **Unit and Integration Testing** using `pytest`.
+- **Code Quality:** Enforcing industry style guides and utilizing static analysis to catch bugs before they ever reach the physical hardware.
+
+---
+
+### 4. Deterministic Logic and Safety
+Unlike web development, mechatronic software can cause physical harm. We emphasize **Automata-based design (FSMs)** to ensure the system is always in a known, deterministic state. Students will learn to model safety interlocks and error states as well as understand in their software architecture.
+
+### 5. Transferability and Language Agnostic Design
+While Python is the implementation tool, the **architectural patterns** (State Pattern, Dependency Injection, Observer Pattern) are taught with a view toward **C++ and ROS-based (Robot Operating System)** environments. This ensures that the mental models developed here are directly applicable to high-performance industrial control and autonomous systems.
+
+
+---
+
+## Course Learning Outcomes (CLOs)
+
+By the end of the course, students will be able to:
+
+1. Model technical systems using software variables and internal states
+2. Implement automata-based (finite state machine) control systems
+3. Design object-oriented architectures for sensors and actuators
+4. Apply abstraction and polymorphism to achieve hardware-independent control
+5. Use Python containers and algorithms professionally for data processing
+6. Verify software using unit, module, and system-level tests
+7. Use professional development tools such as Git, debuggers, build and test systems
+
+
+---
+
+## Books and References
+
+- **Clean Code: A Handbook of Agile Software Craftsmanship** *Author:* Robert C. Martin  
+
+- **Software Modeling and Design: UML, Use Cases, Patterns, and Software Architectures** *Author:* Hassan Gomaa  
+
+- **Fluent Python: Clear, Concise, and Effective Programming** *Author:* Luciano Ramalho  
+
+- **Robotics, Vision and Control: Fundamental Algorithms in Python** *Author:* Peter Corke
+    *Focus:* The essential bridge between robotics theory (kinematics, dynamics) and Python implementation. Highly relevant for Chapters 7, 8 and 9.
+
+---
+
+### Supplemental Resources (Tools)
+
+- **Python3 Tutorial** - [https://docs.python.org/3/tutorial/index.html](https://docs.python.org/3/tutorial/index.html)
+- **Pro Git** (Scott Chacon and Ben Straub) – Available for free at [git-scm.com](https://git-scm.com/book/en/v2).
+- **Official MuJoCo Documentation** – [https://mujoco.readthedocs.io/en/stable/overview.html](https://mujoco.readthedocs.io/en/stable/overview.html) For simulation and physics-based modeling.
+
+---
+
+## Chapter Learning Objectives
 
 By the end of this chapter, you will:
 - Understand the role of software in mechatronic systems
@@ -33,6 +98,25 @@ By the end of this chapter, you will:
 - Set up a professional development environment
 - Initialize and manage a Git repository
 - Organize a Python project structure
+
+
+---
+
+## Assessment Breakdown
+
+- **Final project (code, tests, report): 20%**
+- **Final WRITING exam: 80%**
+
+---
+
+## Academic Integrity Policy
+
+- All submitted code must be explainable by the student
+- Inability to explain submitted code may result in failure
+
+- **AI tools may be used for conceptual explanation only.**
+- **AI-generated code, logic, or architectural designs are not permitted unless explicitly stated.**
+- **Students must be able to explain, derive, and modify all submitted code.**
 
 ---
 
@@ -275,6 +359,7 @@ A professional mechatronics engineer must master **both**.
 - **Encapsulation** - Hide complexity, protect how functions works internally
 - **Inheritance** - Share common behavior
 - **Polymorphism** - Flexible interfaces, use components interchangeably
+
 
 
 ---
